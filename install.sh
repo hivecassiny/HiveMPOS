@@ -583,13 +583,13 @@ main() {
     # 检查root权限
     check_root
 
+    # 显示语言选择菜单
+    show_language_menu
+
     # 🔴 新增：初始化版本号（必须在显示菜单之前）
     if ! init_software_version; then
         exit 1  # 版本获取失败，直接退出
     fi
-    
-    # 显示语言选择菜单
-    show_language_menu
     
     # 主循环
     while true; do
