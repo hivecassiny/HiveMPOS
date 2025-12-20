@@ -4,12 +4,10 @@
 
 # ==================== 全局变量配置 ====================
 # 脚本版本
-SCRIPT_VERSION="1.0.2"
+SCRIPT_VERSION="1.0.5"
 
 # 软件信息
 SOFTWARE_NAME="hivempos"
-SOFTWARE_VERSION="v0.1.042@251217"
-DOWNLOAD_URL="https://github.com/hivecassiny/tesla/releases/download/$SOFTWARE_VERSION/$SOFTWARE_NAME.tar.gz"
 ARCHIVE_NAME="$SOFTWARE_NAME.tar.gz"
 EXTRACTED_NAME="hivempos"
 
@@ -143,6 +141,76 @@ LANG_STRINGS[2,config_not_found]="Configuration file not found"
 LANG_STRINGS[2,press_enter]="Press Enter to continue..."
 LANG_STRINGS[2,operation_failed]="Operation failed"
 LANG_STRINGS[2,operation_success]="Operation successful"
+
+# ==================== 新增：初始化版本函数 ====================
+init_software_version() {
+    # 首先尝试自动获取最新版本
+    local latest_version
+    latest_version=$(get_latest_version_from_page)
+    
+    if [[ $? -eq 0 ]] && [[ -n "$latest_version" ]]; then
+        SOFTWARE_VERSION="$latest_version"
+        print_success "成功获取最新版本: $SOFTWARE_VERSION"
+    else
+        # 如果获取失败，使用默认版本并退出
+        print_error "无法获取最新版本号，脚本无法继续执行"
+        print_info "请检查："
+        echo "  1. 网络连接是否正常"
+        echo "  2. GitHub仓库是否有已发布的版本"
+        echo "  3. 仓库地址是否正确: https://github.com/hivecassiny/HiveMPOS"
+        echo ""
+        print_error "脚本终止"
+        exit 1  # 按照要求，获取失败直接退出
+    fi
+    
+    # 设置下载URL（这里需要放到函数里，因为依赖SOFTWARE_VERSION）
+    DOWNLOAD_URL="https://github.com/hivecassiny/HiveMPOS/releases/download/$SOFTWARE_VERSION/${SOFTWARE_NAME}_linux_adm64.tar.gz"
+}
+
+# ==================== get_latest_version_from_page函数（保持不变） ====================
+get_latest_version_from_page() {
+    # 注意：这里不能使用print_info等函数，因为还没有定义！
+    echo "正在从GitHub获取最新版本号..." >&2
+    
+    local repo_url="https://github.com/hivecassiny/HiveMPOS/releases"
+    local latest_tag=""
+    
+    local version_pattern='releases/tag/(v[0-9]+\.[0-9]+\.[0-9]+[^"]*)'
+    
+    if command -v curl &> /dev/null; then
+        latest_tag=$(curl -s -L "$repo_url" | grep -oE "$version_pattern" | head -1 | cut -d'/' -f3)
+        local curl_status=$?
+        
+        if [[ $curl_status -ne 0 ]]; then
+            echo "curl请求失败 (退出码: $curl_status)" >&2
+            return 1
+        fi
+    elif command -v wget &> /dev/null; then
+        latest_tag=$(wget -qO- "$repo_url" | grep -oE "$version_pattern" | head -1 | cut -d'/' -f3)
+        local wget_status=$?
+        
+        if [[ $wget_status -ne 0 ]]; then
+            echo "wget请求失败 (退出码: $wget_status)" >&2
+            return 1
+        fi
+    else
+        echo "需要curl或wget工具来获取版本信息" >&2
+        return 1
+    fi
+    
+    if [[ -z "$latest_tag" ]]; then
+        echo "无法从GitHub页面解析版本号" >&2
+        return 1
+    fi
+    
+    if [[ ! "$latest_tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+ ]]; then
+        echo "获取到无效的版本号格式: $latest_tag" >&2
+        return 1
+    fi
+    
+    echo "$latest_tag"
+    return 0
+}
 
 # ==================== 工具函数 ====================
 print_message() {
@@ -514,6 +582,11 @@ show_menu() {
 main() {
     # 检查root权限
     check_root
+
+    # 🔴 新增：初始化版本号（必须在显示菜单之前）
+    if ! init_software_version; then
+        exit 1  # 版本获取失败，直接退出
+    fi
     
     # 显示语言选择菜单
     show_language_menu
