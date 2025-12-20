@@ -1,5 +1,5 @@
 #!/bin/bash
-# Tesla HiveMPOS 安装管理脚本
+# HiveMPOS 安装管理脚本
 # 版本: 1.0.0
 
 # ==================== 全局变量配置 ====================
@@ -33,7 +33,7 @@ NC='\033[0m' # No Color
 declare -A LANG_STRINGS
 
 # 中文字符串
-LANG_STRINGS[1,title]="=== Tesla HiveMPOS 管理脚本 ==="
+LANG_STRINGS[1,title]="=== HiveMPOS 管理脚本 ==="
 LANG_STRINGS[1,script_version]="脚本版本"
 LANG_STRINGS[1,software_version]="软件版本"
 LANG_STRINGS[1,menu_title]="请选择操作"
