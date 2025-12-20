@@ -1,7 +1,7 @@
 #!/bin/bash
 # ====================================================
 # HiveMPOS 服务管理脚本
-# 版本: 1.0.0
+# 版本: 1.0.1
 # 支持: CentOS/RHEL 7+, Ubuntu 18.04+, Debian 10+
 # ====================================================
 
@@ -9,7 +9,7 @@ set -e
 
 # ==================== 全局配置 ====================
 # 脚本版本
-SCRIPT_VERSION="1.0.0"
+SCRIPT_VERSION="1.0.1"
 
 # 程序配置
 PROGRAM_NAME="hivempos"
@@ -49,10 +49,10 @@ WHITE='\033[1;37m'
 NC='\033[0m' # No Color
 
 # ==================== 语言文件 ====================
-declare -A LANG_ZH LANG_EN
+declare -A TRANSLATIONS_ZH TRANSLATIONS_EN
 
 # 中文翻译
-LANG_ZH=(
+TRANSLATIONS_ZH=(
     ["title"]="HiveMPOS 服务管理脚本"
     ["version"]="版本"
     ["script_version"]="脚本版本"
@@ -110,8 +110,8 @@ LANG_ZH=(
     ["data_path"]="数据目录:"
     ["port_info"]="服务端口:"
     ["select_lang"]="选择语言:"
-    ["lang_zh"]="1. 中文"
-    ["lang_en"]="2. English"
+    ["TRANSLATIONS_ZH"]="1. 中文"
+    ["TRANSLATIONS_EN"]="2. English"
     ["lang_changed"]="语言已切换!"
     ["requires_root"]="需要root权限!"
     ["checking_update"]="检查更新..."
@@ -131,7 +131,7 @@ LANG_ZH=(
 )
 
 # English translations
-LANG_EN=(
+TRANSLATIONS_EN=(
     ["title"]="HiveMPOS Service Management Script"
     ["version"]="Version"
     ["script_version"]="Script Version"
@@ -189,8 +189,8 @@ LANG_EN=(
     ["data_path"]="Data directory:"
     ["port_info"]="Service port:"
     ["select_lang"]="Select language:"
-    ["lang_zh"]="1. 中文 (Chinese)"
-    ["lang_en"]="2. English"
+    ["TRANSLATIONS_ZH"]="1. 中文 (Chinese)"
+    ["TRANSLATIONS_EN"]="2. English"
     ["lang_changed"]="Language changed!"
     ["requires_root"]="Root privileges required!"
     ["checking_update"]="Checking for updates..."
@@ -211,7 +211,11 @@ LANG_EN=(
 
 # ==================== 工具函数 ====================
 t() {
-    echo -n "${LANG_[$1]}"
+    if [[ "$CURRENT_LANG" == "zh_CN" ]]; then
+        echo -n "${TRANSLATIONS_ZH[$1]}"
+    else
+        echo -n "${TRANSLATIONS_EN[$1]}"
+    fi
 }
 
 print_color() {
@@ -290,9 +294,9 @@ load_language() {
     fi
     
     if [[ "$CURRENT_LANG" == "zh_CN" ]]; then
-        LANG_=("${LANG_ZH[@]}")
+        LANG_=("${TRANSLATIONS_ZH[@]}")
     else
-        LANG_=("${LANG_EN[@]}")
+        LANG_=("${TRANSLATIONS_EN[@]}")
         CURRENT_LANG="en_US"
     fi
 }
@@ -509,6 +513,10 @@ print_config_info() {
 }
 
 view_connections() {
+
+    echo "DEBUG: CURRENT_LANG = $CURRENT_LANG"
+    echo "DEBUG: Translation key = $(t current_connections)"
+
     print_color "$CYAN" "$(t current_connections)"
     
     # 系统连接数
