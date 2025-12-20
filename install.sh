@@ -4,7 +4,7 @@
 
 # ==================== 全局变量配置 ====================
 # 脚本版本
-SCRIPT_VERSION="1.0.6"
+SCRIPT_VERSION="1.0.7"
 
 # 软件信息
 SOFTWARE_NAME="hivempos"
@@ -234,7 +234,7 @@ init_software_version() {
     fi
     
     # 设置下载URL
-    DOWNLOAD_URL="https://github.com/hivecassiny/HiveMPOS/releases/download/$SOFTWARE_VERSION/${SOFTWARE_NAME}_linux_adm64.tar.gz"
+    DOWNLOAD_URL="https://github.com/hivecassiny/HiveMPOS/releases/download/$SOFTWARE_VERSION/${SOFTWARE_NAME}_linux_amd64.tar.gz"
 }
 
 # ==================== 工具函数 ====================
