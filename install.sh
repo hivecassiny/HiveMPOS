@@ -1,10 +1,10 @@
 #!/bin/bash
 # HiveMPOS 安装管理脚本
-# 版本: 1.0.0
+# 版本: 1.0.15
 
 # ==================== 全局变量配置 ====================
 # 脚本版本
-SCRIPT_VERSION="1.0.12"
+SCRIPT_VERSION="1.0.15"
 
 # 软件信息
 SOFTWARE_NAME="hivempos"
@@ -47,7 +47,7 @@ LANG_STRINGS[1,menu_status]="7. 查看服务状态"
 LANG_STRINGS[1,menu_logs]="8. 查看日志"
 LANG_STRINGS[1,menu_config]="9. 查看配置"
 LANG_STRINGS[1,menu_exit]="0. 退出"
-LANG_STRINGS[1,choose_option]="请输入选项 [0-9]: "
+LANG_STRINGS[1,choose_option]="请输入选项 [0-10]: "
 LANG_STRINGS[1,invalid_option]="无效选项，请重新输入"
 LANG_STRINGS[1,goodbye]="再见！"
 LANG_STRINGS[1,require_root]="此脚本需要root权限运行！"
@@ -99,6 +99,17 @@ LANG_STRINGS[1,check1]="1. 网络连接是否正常"
 LANG_STRINGS[1,check2]="2. GitHub仓库是否有已发布的版本"
 LANG_STRINGS[1,check3]="3. 仓库地址是否正确: https://github.com/hivecassiny/HiveMPOS"
 LANG_STRINGS[1,script_terminated]="脚本终止"
+LANG_STRINGS[1,sof_installed]="已经安装不能重新安装"
+LANG_STRINGS[1,menu_update]="10. 更新软件"
+LANG_STRINGS[1,updating]="正在更新软件..."
+LANG_STRINGS[1,update_success]="更新成功！"
+LANG_STRINGS[1,update_failed]="更新失败"
+LANG_STRINGS[1,not_installed]="软件未安装，请先安装"
+LANG_STRINGS[1,checking_update]="检查更新..."
+LANG_STRINGS[1,latest_version]="已经是最新版本"
+LANG_STRINGS[1,new_version_available]="发现新版本"
+LANG_STRINGS[1,current_version]="当前版本"
+LANG_STRINGS[1,update_confirm]="是否要更新到最新版本？ (y/n): "
 
 # 英文字符串
 LANG_STRINGS[2,title]="=== HiveMPOS Management Script ==="
@@ -115,7 +126,7 @@ LANG_STRINGS[2,menu_status]="7. View Service Status"
 LANG_STRINGS[2,menu_logs]="8. View Logs"
 LANG_STRINGS[2,menu_config]="9. View Configuration"
 LANG_STRINGS[2,menu_exit]="0. Exit"
-LANG_STRINGS[2,choose_option]="Enter option [0-9]: "
+LANG_STRINGS[2,choose_option]="Enter option [0-10]: "
 LANG_STRINGS[2,invalid_option]="Invalid option, please try again"
 LANG_STRINGS[2,goodbye]="Goodbye!"
 LANG_STRINGS[2,require_root]="This script requires root privileges!"
@@ -167,6 +178,17 @@ LANG_STRINGS[2,check1]="1. Network connectivity"
 LANG_STRINGS[2,check2]="2. Whether the GitHub repository has published releases"
 LANG_STRINGS[2,check3]="3. Repository URL is correct: https://github.com/hivecassiny/HiveMPOS"
 LANG_STRINGS[2,script_terminated]="Script terminated"
+LANG_STRINGS[2,sof_installed]="sof was installed..."
+LANG_STRINGS[2,menu_update]="10. Update Software"
+LANG_STRINGS[2,updating]="Updating software..."
+LANG_STRINGS[2,update_success]="Update successful!"
+LANG_STRINGS[2,update_failed]="Update failed"
+LANG_STRINGS[2,not_installed]="Software not installed, please install first"
+LANG_STRINGS[2,checking_update]="Checking for updates..."
+LANG_STRINGS[2,latest_version]="Already latest version"
+LANG_STRINGS[2,new_version_available]="New version available"
+LANG_STRINGS[2,current_version]="Current version"
+LANG_STRINGS[2,update_confirm]="Update to latest version? (y/n): "
 
 # ==================== get_latest_version_from_page函数（优化版） ====================
 get_latest_version_from_page() {
@@ -354,12 +376,99 @@ get_socket_connections() {
     echo "Hard limit: $(ulimit -Hn)"
 }
 
+# ==================== 更新函数 ====================
+update_service() {
+    print_info "$(print_message checking_update)"
+
+    # 检查软件是否已安装
+    if [[ ! -f "$INSTALL_DIR/$SOFTWARE_NAME" ]]; then
+        print_error "$(print_message not_installed)"
+        return 1
+    fi
+    # 确认更新
+    read -rp "$(print_message update_confirm)" confirm_update
+    
+    if [[ ! "$confirm_update" =~ ^[Yy]$ ]]; then
+        print_info "更新已取消"
+        return 0
+    fi
+
+    # 开始更新
+    print_info "$(print_message updating)"
+
+    # 停止服务
+    systemctl stop "$SERVICE_NAME" 2>/dev/null
+
+    # 删除原来的执行文件
+    rm "$INSTALL_DIR/"${SOFTWARE_NAME}
+
+    # 下载软件
+    print_message downloading
+    if command -v wget &> /dev/null; then
+        wget -O "/tmp/$ARCHIVE_NAME" "$DOWNLOAD_URL"
+    elif command -v curl &> /dev/null; then
+        curl -L -o "/tmp/$ARCHIVE_NAME" "$DOWNLOAD_URL"
+    else
+        print_error "$(print_message download_failed)"
+        return 1
+    fi
+    
+    if [[ $? -ne 0 ]] || [[ ! -f "/tmp/$ARCHIVE_NAME" ]]; then
+        print_error "$(print_message download_failed)"
+        return 1
+    fi
+    
+    print_success "$(print_message operation_success)"
+    
+    # 解压文件
+    print_message extracting
+    tar -xzf "/tmp/$ARCHIVE_NAME" -C /tmp/
+    if [[ $? -ne 0 ]] || [[ ! -d "/tmp/$EXTRACTED_NAME" ]]; then
+        print_error "$(print_message extract_failed)"
+        return 1
+    fi
+    
+    print_success "$(print_message operation_success)"
+
+    # 复制文件
+    print_message copying_files
+    cp -r "/tmp/$EXTRACTED_NAME/"${SOFTWARE_NAME} "$INSTALL_DIR/"
+    chmod +x "$INSTALL_DIR/"* 2>/dev/null
+
+    # 清理临时文件
+    rm -f "/tmp/$ARCHIVE_NAME"
+    rm -rf "/tmp/$EXTRACTED_NAME"
+
+    # 启动服务
+    systemctl start "$SERVICE_NAME"
+
+    if [[ $? -eq 0 ]]; then
+        print_success "$(print_message update_success)"
+        
+        # 查看服务状态
+        sleep 2
+        systemctl status "$SERVICE_NAME" --no-pager
+    else
+        print_error "$(print_message update_failed)"
+        return 1
+    fi
+
+    return 0
+
+}
+
 install_service() {
     print_info "$(print_message installing)"
     
     # 检查依赖
     if ! check_dependencies; then
         print_error "$(print_message operation_failed)"
+        return 1
+    fi
+
+    # 检查软件是否已安装
+    if [[ -f "$INSTALL_DIR/$SOFTWARE_NAME" ]]; then
+        print_error "$(print_message sof_installed)"
         return 1
     fi
     
@@ -592,6 +701,7 @@ show_menu() {
     echo "$(print_message menu_title):"
     echo "$(print_message menu_install)"
     echo "$(print_message menu_uninstall)"
+    echo "$(print_message menu_update)" 
     echo "$(print_message menu_restart)"
     echo "$(print_message menu_stop)"
     echo "$(print_message menu_start)"
@@ -660,6 +770,10 @@ main() {
                 ;;
             9)
                 view_config
+                press_enter
+                ;;
+            10)
+                update_service      # 新增的更新功能
                 press_enter
                 ;;
             *)
