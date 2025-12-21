@@ -433,10 +433,10 @@ EOF
 # HiveMPOS Configuration
 # Generated on $(date)
 
-# Service settings
-SERVICE_PORT=8080
+# Default Service settings
+SERVICE_PORT=10000
 LOG_LEVEL=info
-MAX_CONNECTIONS=1000
+MAX_CONNECTIONS=65535
 
 # Add your custom configuration below
 EOF
