@@ -9,7 +9,7 @@ SCRIPT_VERSION="1.0.10"
 # 软件信息
 SOFTWARE_NAME="hivempos"
 ARCHIVE_NAME="$SOFTWARE_NAME.tar.gz"
-EXTRACTED_NAME="hivempos"
+EXTRACTED_NAME="hivempos_linux_amd64"
 
 # 安装路径
 INSTALL_DIR="/opt/$SOFTWARE_NAME"
