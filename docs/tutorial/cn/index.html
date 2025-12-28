@@ -2,8 +2,9 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hiveminer PC端操作手册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>Hiveminer 操作手册</title>
     <style>
         * {
             margin: 0;
@@ -51,6 +52,9 @@
         .nav-link:hover {
             background-color: #e9ecef;
             color: #2196f3;
+        }
+        .nav-link:active {
+            background-color: #d0e7ff;
         }
         .nav-link.active {
             background-color: #2196f3;
@@ -153,28 +157,229 @@
         html {
             scroll-behavior: smooth;
         }
+        /* 移动端菜单按钮 */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1001;
+            background-color: #2196f3;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        .mobile-menu-toggle:active {
+            background-color: #1976d2;
+            transform: scale(0.95);
+        }
+        .mobile-menu-toggle:hover {
+            background-color: #1976d2;
+        }
         /* 响应式调整 */
         @media (max-width: 768px) {
+            html, body {
+                height: auto;
+                min-height: 100vh;
+                overflow-x: hidden;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
             body {
                 flex-direction: column;
-                height: auto;
+                position: relative;
+            }
+            .mobile-menu-toggle {
+                display: block;
             }
             .sidebar {
                 width: 100%;
-                height: auto;
-                max-height: 300px;
+                max-width: 100%;
+                max-height: 0;
+                overflow: hidden;
                 border-right: none;
                 border-bottom: 1px solid #dee2e6;
+                transition: max-height 0.3s ease, opacity 0.3s ease;
+                position: fixed !important;
+                top: 60px !important;
+                left: 0 !important;
+                right: 0 !important;
+                z-index: 1000 !important;
+                opacity: 0;
+                display: block;
+                background-color: #f8f9fa;
+            }
+            .sidebar.active {
+                max-height: 500px !important;
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                opacity: 1 !important;
+                display: block !important;
+            }
+            .sidebar h2 {
+                font-size: 16px;
+                padding: 15px 20px 10px;
+            }
+            .nav-link {
+                padding: 12px 20px;
+                font-size: 15px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+            .nav-submenu .nav-link {
+                padding-left: 40px;
+                font-size: 14px;
             }
             .content {
-                padding: 20px;
+                padding: 15px;
+                margin-top: 60px;
+                overflow-y: visible;
+                overflow-x: hidden;
+                min-height: calc(100vh - 60px);
             }
+            h1 {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+            h2 {
+                font-size: 18px;
+                margin: 20px 0 12px;
+            }
+            h3 {
+                font-size: 16px;
+                margin: 18px 0 10px;
+            }
+            h4 {
+                font-size: 15px;
+                margin: 15px 0 8px;
+            }
+            p, li {
+                font-size: 14px;
+                line-height: 1.7;
+            }
+            .section {
+                margin-bottom: 30px;
+                padding-bottom: 15px;
+            }
+            .img-box {
+                margin: 15px 0;
+            }
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                font-size: 13px;
+                margin: 15px 0;
+            }
+            table th, table td {
+                padding: 10px 12px;
+                white-space: nowrap;
+                min-width: 80px;
+            }
+            .note {
+                padding: 12px;
+                font-size: 13px;
+                margin: 12px 0;
+            }
+            ul, ol {
+                margin: 0 0 12px 20px;
+            }
+        }
+        /* 小屏幕手机优化 */
+        @media (max-width: 480px) {
+            .content {
+                padding: 12px;
+                margin-top: 55px;
+            }
+            .mobile-menu-toggle {
+                top: 10px;
+                left: 10px;
+                padding: 10px 14px;
+                font-size: 16px;
+            }
+            h1 {
+                font-size: 18px;
+            }
+            h2 {
+                font-size: 16px;
+            }
+            h3 {
+                font-size: 15px;
+            }
+            h4 {
+                font-size: 14px;
+            }
+            p, li {
+                font-size: 13px;
+            }
+            .sidebar.active {
+                max-height: 350px;
+            }
+            table {
+                font-size: 12px;
+            }
+            table th, table td {
+                padding: 8px 10px;
+                min-width: 70px;
+            }
+        }
+        /* 触摸优化 */
+        @media (hover: none) and (pointer: coarse) {
+            .nav-link {
+                min-height: 44px;
+            }
+            .nav-link:active {
+                background-color: #d0e7ff;
+                transform: scale(0.98);
+            }
+            button, .nav-link {
+                -webkit-tap-highlight-color: rgba(33, 150, 243, 0.2);
+            }
+        }
+        /* 移动端优化滚动 */
+        @media (max-width: 768px) {
+            /* 防止iOS Safari的橡皮筋效果，但允许正常滚动 */
+            html {
+                position: relative;
+                overflow-x: hidden;
+                -webkit-overflow-scrolling: touch;
+            }
+            body {
+                position: relative;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+        }
+        /* PC端保持原有设置 */
+        @media (min-width: 769px) {
+            body {
+                position: relative;
+                overflow-x: hidden;
+            }
+        }
+        /* 优化滚动性能 */
+        .sidebar, .content {
+            -webkit-overflow-scrolling: touch;
         }
     </style>
 </head>
 <body>
+    <!-- 移动端菜单按钮 -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="切换菜单">☰ 菜单</button>
     <!-- 左侧目录 -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
         <h2>Hiveminer操作手册大纲</h2>
         <ul class="nav-list">
             <li class="nav-item">
@@ -1186,5 +1391,619 @@
     </main>
 
     <script>
-        // 目录联动高亮
-        document.addEventListener('DOMContentLoaded', function() {
+        // 立即输出，确认脚本执行
+        console.log('=== 脚本开始执行 ===');
+        console.log('当前时间:', new Date().toLocaleTimeString());
+        
+        // 统一初始化
+        function initNavigation() {
+            console.log('=== 开始初始化导航 ===');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            console.log('找到元素:', {
+                mobileMenuToggle: !!mobileMenuToggle,
+                sidebar: !!sidebar,
+                sections: sections.length,
+                navLinks: navLinks.length
+            });
+            
+            // 检查元素是否存在
+            if (navLinks.length === 0) {
+                console.error('未找到导航链接！');
+                return;
+            }
+            console.log('初始化导航，找到', navLinks.length, '个链接');
+            
+            // 更新高亮状态的函数
+            function updateActiveLink() {
+                // 检测是移动端还是PC端
+                const isMobile = window.innerWidth <= 768;
+                const contentElement = document.querySelector('.content');
+                
+                // 获取滚动位置
+                let scrollPosition;
+                let viewportHeight;
+                
+                if (isMobile) {
+                    // 移动端：使用 window 滚动
+                    scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+                    viewportHeight = window.innerHeight;
+                } else if (contentElement) {
+                    // PC端：使用 content 容器滚动
+                    scrollPosition = contentElement.scrollTop;
+                    viewportHeight = contentElement.clientHeight;
+                } else {
+                    // 备用方案
+                    scrollPosition = window.pageYOffset || document.documentElement.scrollTop || 0;
+                    viewportHeight = window.innerHeight;
+                }
+                
+                const offset = 150; // 偏移量
+                let activeLink = null;
+                let maxVisibleArea = 0;
+                
+                // 清除所有高亮
+                navLinks.forEach(function(link) {
+                    link.classList.remove('active');
+                });
+                
+                // 遍历所有链接，找到在视口内可见面积最大的链接
+                navLinks.forEach(function(link) {
+                    const href = link.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        const target = document.querySelector(href);
+                        if (target) {
+                            // 计算目标元素相对于滚动容器的位置
+                            let targetTop = 0;
+                            let element = target;
+                            while (element && (contentElement ? element !== contentElement : element !== document.body)) {
+                                targetTop += element.offsetTop;
+                                element = element.offsetParent;
+                            }
+                            
+                            const targetBottom = targetTop + target.offsetHeight;
+                            const viewportTop = scrollPosition + offset;
+                            const viewportBottom = scrollPosition + viewportHeight;
+                            
+                            // 计算可见区域
+                            const visibleTop = Math.max(targetTop, viewportTop);
+                            const visibleBottom = Math.min(targetBottom, viewportBottom);
+                            const visibleArea = Math.max(0, visibleBottom - visibleTop);
+                            
+                            // 如果目标在视口内，选择可见面积最大的
+                            if (visibleArea > 0 && visibleArea > maxVisibleArea) {
+                                maxVisibleArea = visibleArea;
+                                activeLink = link;
+                            }
+                            // 如果目标在视口上方很近，也考虑（用于刚滚动过的情况）
+                            else if (targetBottom < viewportTop && viewportTop - targetBottom < 200) {
+                                if (!activeLink || maxVisibleArea === 0) {
+                                    activeLink = link;
+                                }
+                            }
+                        }
+                    }
+                });
+                
+                // 如果没有找到可见的，找最接近的 section
+                if (!activeLink) {
+                    let closestSection = null;
+                    let minDistance = Infinity;
+                    
+                    sections.forEach(function(section) {
+                        const sectionTop = section.offsetTop;
+                        const distance = Math.abs(sectionTop - scrollPosition - offset);
+                        if (distance < minDistance) {
+                            minDistance = distance;
+                            closestSection = section;
+                        }
+                    });
+                    
+                    if (closestSection) {
+                        const sectionId = closestSection.getAttribute('id');
+                        const sectionLink = Array.from(navLinks).find(function(link) {
+                            return link.getAttribute('href') === '#' + sectionId;
+                        });
+                        if (sectionLink) {
+                            activeLink = sectionLink;
+                        }
+                    }
+                }
+                
+                // 应用高亮
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+            }
+            
+            // 移动端菜单切换
+            if (mobileMenuToggle && sidebar) {
+                console.log('绑定菜单切换按钮事件');
+                
+                // 使用事件委托，避免重复绑定问题
+                let menuButton = mobileMenuToggle;
+                
+                // 移除所有旧的事件监听器（通过克隆）
+                const newButton = menuButton.cloneNode(true);
+                menuButton.parentNode.replaceChild(newButton, menuButton);
+                menuButton = document.getElementById('mobileMenuToggle');
+                
+                console.log('菜单按钮元素:', menuButton);
+                
+                // 绑定点击事件 - 使用多种方式确保能触发
+                function handleMenuToggle(e) {
+                    console.log('菜单按钮被点击', e.type);
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const sidebarElement = document.getElementById('sidebar');
+                    if (sidebarElement) {
+                        const wasActive = sidebarElement.classList.contains('active');
+                        sidebarElement.classList.toggle('active');
+                        const isActive = sidebarElement.classList.contains('active');
+                        
+                        console.log('菜单状态切换:', wasActive, '->', isActive);
+                        console.log('Sidebar 类名:', sidebarElement.className);
+                        
+                        // 直接设置样式，确保展开/收起 - 使用更强制的方式
+                        if (isActive) {
+                            // 展开菜单
+                            // 先禁用 transition，立即设置样式
+                            const originalTransition = sidebarElement.style.transition;
+                            sidebarElement.style.transition = 'none';
+                            
+                            // 先设置 display 确保元素可见
+                            sidebarElement.style.display = 'block';
+                            
+                            // 计算实际需要的高度（内容高度）
+                            const scrollHeight = sidebarElement.scrollHeight;
+                            const targetHeight = Math.min(scrollHeight + 20, 500); // 最多500px，加上一些padding
+                            
+                            sidebarElement.style.maxHeight = targetHeight + 'px';
+                            sidebarElement.style.overflowY = 'auto';
+                            sidebarElement.style.overflowX = 'hidden';
+                            sidebarElement.style.opacity = '1';
+                            sidebarElement.style.visibility = 'visible';
+                            sidebarElement.style.display = 'block';
+                            
+                            // 确保在正确的位置（移动端使用 fixed 定位）
+                            if (window.innerWidth <= 768) {
+                                sidebarElement.style.position = 'fixed';
+                                sidebarElement.style.top = '60px';
+                                sidebarElement.style.left = '0';
+                                sidebarElement.style.right = '0';
+                                sidebarElement.style.width = '100%';
+                                sidebarElement.style.zIndex = '1000';
+                                sidebarElement.style.backgroundColor = '#f8f9fa';
+                            } else {
+                                sidebarElement.style.position = 'relative';
+                                sidebarElement.style.zIndex = '1000';
+                            }
+                            
+                            // 强制重排
+                            void sidebarElement.offsetHeight;
+                            
+                            // 恢复 transition（如果需要动画效果）
+                            setTimeout(function() {
+                                sidebarElement.style.transition = originalTransition || '';
+                            }, 10);
+                            
+                            console.log('菜单已展开，目标高度:', targetHeight, 'px');
+                            console.log('Sidebar 位置信息:', {
+                                offsetTop: sidebarElement.offsetTop,
+                                offsetLeft: sidebarElement.offsetLeft,
+                                offsetWidth: sidebarElement.offsetWidth,
+                                offsetHeight: sidebarElement.offsetHeight,
+                                clientHeight: sidebarElement.clientHeight,
+                                scrollHeight: sidebarElement.scrollHeight
+                            });
+                            
+                            // 验证
+                            setTimeout(function() {
+                                const computed = window.getComputedStyle(sidebarElement);
+                                const rect = sidebarElement.getBoundingClientRect();
+                                console.log('展开后计算样式:', {
+                                    maxHeight: computed.maxHeight,
+                                    overflowY: computed.overflowY,
+                                    opacity: computed.opacity,
+                                    display: computed.display,
+                                    visibility: computed.visibility,
+                                    scrollHeight: sidebarElement.scrollHeight,
+                                    clientHeight: sidebarElement.clientHeight,
+                                    offsetHeight: sidebarElement.offsetHeight
+                                });
+                                console.log('Sidebar 位置和尺寸:', {
+                                    top: rect.top,
+                                    left: rect.left,
+                                    width: rect.width,
+                                    height: rect.height,
+                                    visible: rect.height > 0 && computed.opacity !== '0'
+                                });
+                                
+                                // 如果高度为0，尝试强制设置
+                                if (rect.height === 0 || sidebarElement.clientHeight === 0) {
+                                    console.warn('检测到菜单高度为0，尝试强制展开');
+                                    sidebarElement.style.height = 'auto';
+                                    sidebarElement.style.maxHeight = '500px';
+                                    sidebarElement.style.minHeight = '200px';
+                                }
+                            }, 200);
+                        } else {
+                            // 收起菜单
+                            console.log('开始收起菜单');
+                            
+                            // 先禁用 transition，立即设置样式
+                            const originalTransition = sidebarElement.style.transition;
+                            sidebarElement.style.transition = 'none';
+                            
+                            sidebarElement.style.maxHeight = '0';
+                            sidebarElement.style.overflowY = 'hidden';
+                            sidebarElement.style.overflowX = 'hidden';
+                            sidebarElement.style.opacity = '0';
+                            
+                            // 强制重排
+                            void sidebarElement.offsetHeight;
+                            
+                            // 恢复 transition
+                            setTimeout(function() {
+                                sidebarElement.style.transition = originalTransition || '';
+                            }, 10);
+                            
+                            console.log('菜单已收起，样式已设置');
+                            
+                            // 验证
+                            setTimeout(function() {
+                                const computed = window.getComputedStyle(sidebarElement);
+                                const rect = sidebarElement.getBoundingClientRect();
+                                console.log('收起后计算样式:', {
+                                    maxHeight: computed.maxHeight,
+                                    overflowY: computed.overflowY,
+                                    opacity: computed.opacity,
+                                    height: rect.height
+                                });
+                                
+                                // 如果高度不为0，强制设置
+                                if (rect.height > 10) {
+                                    console.warn('检测到菜单未完全收起，强制设置');
+                                    sidebarElement.style.maxHeight = '0';
+                                    sidebarElement.style.height = '0';
+                                    sidebarElement.style.opacity = '0';
+                                }
+                            }, 200);
+                        }
+                        
+                        // 输出计算样式用于调试
+                        setTimeout(function() {
+                            const computedStyle = window.getComputedStyle(sidebarElement);
+                            console.log('Sidebar 计算样式:', {
+                                maxHeight: computedStyle.maxHeight,
+                                overflow: computedStyle.overflow,
+                                overflowY: computedStyle.overflowY,
+                                opacity: computedStyle.opacity,
+                                display: computedStyle.display,
+                                visibility: computedStyle.visibility,
+                                height: computedStyle.height
+                            });
+                        }, 100);
+                        
+                        menuButton.textContent = isActive ? '✕ 关闭' : '☰ 菜单';
+                    } else {
+                        console.error('未找到 sidebar 元素');
+                    }
+                    
+                    return false;
+                }
+                
+                // 方法1: addEventListener
+                menuButton.addEventListener('click', handleMenuToggle, { passive: false });
+                
+                // 方法2: onclick 作为备用
+                menuButton.onclick = handleMenuToggle;
+                
+                // 方法3: touchstart 用于移动端
+                menuButton.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    handleMenuToggle(e);
+                }, { passive: false });
+                
+                // 点击内容区域关闭菜单
+                const content = document.querySelector('.content');
+                if (content) {
+                    content.addEventListener('click', function(e) {
+                        // 如果点击的是链接，不关闭菜单（让链接处理函数处理）
+                        if (e.target.closest('.nav-link')) {
+                            return;
+                        }
+                        
+                        if (window.innerWidth <= 768 && sidebar.classList.contains('active')) {
+                            console.log('点击内容区域，关闭菜单');
+                            
+                            // 移除 active 类
+                            sidebar.classList.remove('active');
+                            
+                            // 同步更新样式
+                            const originalTransition = sidebar.style.transition;
+                            sidebar.style.transition = 'none';
+                            sidebar.style.maxHeight = '0';
+                            sidebar.style.overflowY = 'hidden';
+                            sidebar.style.opacity = '0';
+                            void sidebar.offsetHeight;
+                            sidebar.style.transition = originalTransition || '';
+                            
+                            // 更新按钮文本
+                            menuButton.textContent = '☰ 菜单';
+                        }
+                    });
+                }
+            } else {
+                console.error('菜单按钮或侧边栏未找到:', {
+                    mobileMenuToggle: !!mobileMenuToggle,
+                    sidebar: !!sidebar
+                });
+            }
+            
+            // 导航链接点击处理 - 使用最简单直接的方式
+            console.log('开始绑定导航链接事件...');
+            
+            // 重新获取链接列表，确保获取到最新的DOM元素
+            const currentNavLinks = document.querySelectorAll('.nav-link');
+            console.log('当前找到', currentNavLinks.length, '个链接');
+            
+            currentNavLinks.forEach(function(link, index) {
+                const href = link.getAttribute('href');
+                console.log('绑定链接', index, href);
+                
+                // 方法1: 使用 addEventListener
+                link.addEventListener('click', function(e) {
+                    console.log('链接被点击（addEventListener）！', this.getAttribute('href'));
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    handleLinkClick.call(this, e);
+                });
+                
+                // 方法2: 使用 onclick 作为备用
+                link.onclick = function(e) {
+                    console.log('链接被点击（onclick）！', this.getAttribute('href'));
+                    e = e || window.event;
+                    if (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    handleLinkClick.call(this, e);
+                    return false;
+                };
+            });
+            
+            // 统一的链接点击处理函数
+            function handleLinkClick(e) {
+                    
+                const href = this.getAttribute('href');
+                console.log('处理链接点击，href:', href);
+                
+                if (href && href.startsWith('#')) {
+                    const targetElement = document.querySelector(href);
+                    console.log('找到目标元素:', targetElement);
+                    
+                    if (targetElement) {
+                        // 立即更新高亮状态
+                        const allLinks = document.querySelectorAll('.nav-link');
+                        allLinks.forEach(function(l) {
+                            l.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                        
+                        // 检测是移动端还是PC端
+                        const isMobile = window.innerWidth <= 768;
+                        const contentElement = document.querySelector('.content');
+                        
+                        // 移动端使用 window 滚动，PC端使用 content 容器滚动
+                        if (isMobile) {
+                            // 移动端：使用 window 滚动
+                            const targetTop = targetElement.offsetTop;
+                            const offsetTop = Math.max(0, targetTop - 80);
+                            
+                            console.log('移动端滚动信息:', {
+                                targetElement: targetElement.id || targetElement.className,
+                                targetTop: targetTop,
+                                offsetTop: offsetTop,
+                                currentScrollTop: window.pageYOffset || document.documentElement.scrollTop,
+                                windowHeight: window.innerHeight
+                            });
+                            
+                            // 滚动 window
+                            try {
+                                // 方法1: 使用 scrollTo
+                                window.scrollTo({
+                                    top: offsetTop,
+                                    behavior: 'smooth'
+                                });
+                                console.log('移动端滚动命令已执行，目标位置:', offsetTop);
+                                
+                                // 验证滚动是否成功
+                                setTimeout(function() {
+                                    const actualScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                                    console.log('移动端实际滚动位置:', actualScroll, '目标位置:', offsetTop);
+                                    if (Math.abs(actualScroll - offsetTop) > 50) {
+                                        console.log('移动端平滑滚动失败，使用立即滚动');
+                                        // 尝试多种滚动方式
+                                        if (document.documentElement.scrollTop !== undefined) {
+                                            document.documentElement.scrollTop = offsetTop;
+                                        } else if (document.body.scrollTop !== undefined) {
+                                            document.body.scrollTop = offsetTop;
+                                        } else {
+                                            window.scrollTo(0, offsetTop);
+                                        }
+                                    }
+                                }, 500);
+                            } catch (err) {
+                                console.error('移动端滚动错误:', err);
+                                // 降级方案
+                                if (document.documentElement.scrollTop !== undefined) {
+                                    document.documentElement.scrollTop = offsetTop;
+                                } else if (document.body.scrollTop !== undefined) {
+                                    document.body.scrollTop = offsetTop;
+                                } else {
+                                    window.scrollTo(0, offsetTop);
+                                }
+                            }
+                        } else if (contentElement) {
+                            // PC端：使用 content 容器滚动
+                            // 计算目标元素相对于 content 容器的位置
+                            let targetTop = 0;
+                            let element = targetElement;
+                            
+                            // 向上遍历，累加 offsetTop
+                            while (element && element !== contentElement) {
+                                targetTop += element.offsetTop;
+                                element = element.offsetParent;
+                            }
+                            
+                            // 减去 content 的 padding
+                            const contentPadding = parseInt(window.getComputedStyle(contentElement).paddingTop) || 0;
+                            const offsetTop = Math.max(0, targetTop - 100 - contentPadding);
+                            
+                            console.log('PC端滚动信息:', {
+                                targetElement: targetElement.id || targetElement.className,
+                                targetTop: targetTop,
+                                offsetTop: offsetTop,
+                                currentScrollTop: contentElement.scrollTop,
+                                contentPadding: contentPadding
+                            });
+                            
+                            // 滚动 content 容器
+                            try {
+                                contentElement.scrollTo({
+                                    top: offsetTop,
+                                    behavior: 'smooth'
+                                });
+                                console.log('PC端滚动命令已执行，目标位置:', offsetTop);
+                                
+                                // 验证滚动是否成功
+                                setTimeout(function() {
+                                    const actualScroll = contentElement.scrollTop;
+                                    console.log('PC端实际滚动位置:', actualScroll, '目标位置:', offsetTop);
+                                    if (Math.abs(actualScroll - offsetTop) > 50) {
+                                        console.log('PC端平滑滚动可能失败，使用立即滚动');
+                                        contentElement.scrollTop = offsetTop;
+                                    }
+                                }, 300);
+                            } catch (err) {
+                                console.error('PC端滚动错误:', err);
+                                contentElement.scrollTop = offsetTop;
+                            }
+                        } else {
+                            // 备用方案：使用 window 滚动
+                            const targetTop = targetElement.offsetTop;
+                            const offsetTop = Math.max(0, targetTop - 100);
+                            
+                            console.log('使用 window 滚动（备用方案），位置:', offsetTop);
+                            window.scrollTo({
+                                top: offsetTop,
+                                behavior: 'smooth'
+                            });
+                        }
+                        
+                        // 延迟更新高亮状态
+                        setTimeout(function() {
+                            updateActiveLink();
+                        }, 100);
+                        
+                        // 移动端关闭菜单
+                        if (window.innerWidth <= 768) {
+                            const sidebarElement = document.getElementById('sidebar');
+                            const menuButton = document.getElementById('mobileMenuToggle');
+                            
+                            if (sidebarElement && sidebarElement.classList.contains('active')) {
+                                setTimeout(function() {
+                                    console.log('链接点击后，自动关闭菜单');
+                                    
+                                    // 移除 active 类
+                                    sidebarElement.classList.remove('active');
+                                    
+                                    // 同步更新样式
+                                    const originalTransition = sidebarElement.style.transition;
+                                    sidebarElement.style.transition = 'none';
+                                    sidebarElement.style.maxHeight = '0';
+                                    sidebarElement.style.overflowY = 'hidden';
+                                    sidebarElement.style.opacity = '0';
+                                    void sidebarElement.offsetHeight;
+                                    sidebarElement.style.transition = originalTransition || '';
+                                    
+                                    // 更新按钮文本
+                                    if (menuButton) {
+                                        menuButton.textContent = '☰ 菜单';
+                                    }
+                                }, 400);
+                            }
+                        }
+                    } else {
+                        console.warn('未找到目标元素:', href);
+                    }
+                }
+            }
+            
+            console.log('导航链接事件绑定完成');
+            
+            // 监听滚动事件，实时更新高亮状态
+            let scrollTimer = null;
+            const contentElement = document.querySelector('.content');
+            
+            // 同时监听 window 和 content 的滚动事件
+            function handleScroll() {
+                // 使用节流优化性能
+                if (scrollTimer !== null) {
+                    clearTimeout(scrollTimer);
+                }
+                scrollTimer = setTimeout(function() {
+                    updateActiveLink();
+                }, 50);
+            }
+            
+            // 监听 window 滚动（移动端和备用）
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            
+            // 监听 content 容器滚动（PC端）
+            if (contentElement) {
+                contentElement.addEventListener('scroll', handleScroll, { passive: true });
+            }
+            
+            // 页面加载时初始化高亮状态
+            updateActiveLink();
+            
+            // 窗口大小改变时重新计算
+            window.addEventListener('resize', function() {
+                setTimeout(updateActiveLink, 100);
+            });
+        }
+        
+        // 确保在DOM加载完成后执行
+        console.log('文档状态:', document.readyState);
+        
+        if (document.readyState === 'loading') {
+            console.log('等待DOM加载...');
+            document.addEventListener('DOMContentLoaded', function() {
+                console.log('DOM加载完成，执行初始化');
+                initNavigation();
+            });
+        } else {
+            // DOM已经加载完成，立即执行
+            console.log('DOM已加载，立即执行初始化');
+            initNavigation();
+        }
+        
+        // 备用方案：延迟执行，确保DOM完全准备好
+        setTimeout(function() {
+            console.log('延迟检查：尝试重新初始化');
+            const testLinks = document.querySelectorAll('.nav-link');
+            if (testLinks.length > 0 && testLinks[0].onclick === null) {
+                console.log('检测到链接未绑定事件，重新初始化');
+                initNavigation();
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
