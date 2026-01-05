@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="format-detection" content="telephone=no">
-    <title>Hiveminer 操作手册</title>
+	<link rel="icon" type="image/svg+xml" href="http://www.hiveminerproxy.com:10000/assets/logo-DQvzClBb.svg">
+    <title>HiveMPOS 操作手册</title>
     <style>
         * {
             margin: 0;
@@ -380,7 +381,7 @@
     <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="切换菜单">☰ 菜单</button>
     <!-- 左侧目录 -->
     <aside class="sidebar" id="sidebar">
-        <h2>Hiveminer操作手册大纲</h2>
+        <h2>HiveMPOS操作手册大纲</h2>
         <ul class="nav-list">
             <li class="nav-item">
                 <a href="#overview" class="nav-link">一、手册概述</a>
@@ -464,7 +465,7 @@
         <!-- 一、手册概述 -->
         <section id="overview" class="section">
             <h1>一、手册概述</h1>
-            <p>本手册用于指导用户识别Hiveminer平台PC端登录、首页、钱包、飞行表、矿池、事件、公共统计、账户设置页面的功能元素，并完成各页面的核心操作，帮助用户快速熟悉平台界面及全流程使用逻辑。</p>
+            <p>本手册用于指导用户识别HiveMPOS平台PC端登录、首页、钱包、飞行表、矿池、事件、公共统计、账户设置页面的功能元素，并完成各页面的核心操作，帮助用户快速熟悉平台界面及全流程使用逻辑。</p>
         </section>
 
         <!-- 二、登录界面 -->
@@ -477,7 +478,7 @@
             <h2 id="login-elements">2.1 界面元素说明</h2>
             <ol>
                 <li>
-                    <strong>平台标识：</strong>界面顶部的黄色双六边形组合Logo，为Hiveminer平台专属标识
+                    <strong>平台标识：</strong>界面顶部的黄色双六边形组合Logo，为HiveMPOS平台专属标识
                     <div class="img-box">
                         <img src="images/login/logo.png" alt="平台标识">
                     </div>
@@ -651,7 +652,7 @@
                     <strong>查看系统概览</strong>
                     <p>直接查看顶部“系统概览数据栏”，快速了解平台当前运行状态。</p>
                     <div class="img-box">
-                        <img src="1" alt="系统概览查看">
+                        <img src="images/index/gailan.png" alt="系统概览查看">
                     </div>
                 </li>
                 <li><strong>切换功能模块</strong>：点击“功能标签栏”中的“钱包”“矿池”等标签，进入对应功能页面。</li>
@@ -659,21 +660,21 @@
                     <strong>搜索目标分组</strong>
                     <p>在“搜索分组名称”输入框中输入分组名，筛选出指定分组。</p>
                     <div class="img-box">
-                        <img src="分组" alt="分组搜索">
+                        <img src="images/index/sousuofenzu.png" alt="分组搜索">
                     </div>
                 </li>
                 <li>
                     <strong>编辑分组信息</strong>
                     <p>点击目标分组对应的铅笔图标，进入分组编辑界面调整配置。注意：分组名不允许重复。</p>
                     <div class="img-box">
-                        <img src="0" alt="分组编辑">
+                        <img src="images/index/bianjifenzu.png" alt="分组编辑">
                     </div>
                 </li>
                 <li>
                     <strong>“偏好”设置/取消</strong>
                     <p>“偏好”即“收藏”，高亮时表示已加入收藏，已收藏的分组会置顶显示在列表最上面</p>
                     <div class="img-box">
-                        <img src="日每" alt="偏好设置">
+                        <img src="images/index/soucang.png" alt="偏好设置">
                     </div>
                 </li>
             </ol>
@@ -681,22 +682,22 @@
             <h2 id="group-detail">3.3 分组详情页面</h2>
             <p>本小节对应从首页分组列表点击目标条目进入的分组详情页面，包含 “服务器列表”“钱包”“飞行表”“矿池”“设定” 5 个标签页，用于管理该分组的专属配置。点击下图行进入分组详情页面</p>
             <div class="img-box">
-                <img src="tmp/299356901890_docxword_media_image10.png" alt="分组列表进入详情">
+                <img src="images/index/list.png" alt="分组列表进入详情">
                 <p>图1（分组列表页面）</p>
             </div>
 
             <h3>3.3.1 服务器列表页面</h3>
             <div class="img-box">
-                <img src="Hive Miner ·tanke" alt="服务器列表页面">
+                <img src="images/index/server_list.png" alt="服务器列表页面">
             </div>
             <h4>3.3.1.1 界面元素说明</h4>
             <ol>
                 <li>顶部概览数据栏：显示当前服务器的核心状态（服务器数、矿机数、HASH RATE 算力、总消耗流量、正在使用的飞行表数）</li>
                 <li>标签栏：当前选中 “服务器列表” 标签，支持切换至 “钱包”“飞行表” 等标签</li>
                 <li>
-                    <strong>筛选控件</strong>：包含 “全部”“在线”“离线”“偏好” 复选框，用于筛选服务器的显示范围。点击图标，支持自定义按“服务器名称”/“IP地址”进行模糊搜索；点击，支持自定义排序。
+                    <strong>筛选控件</strong>：包含 “全部”“在线”“离线”“偏好” 复选框，用于筛选服务器的显示范围。点击图标 <img src="images/index/setting_icon.png" alt="服务器列表页面">，支持自定义按“服务器名称”/“IP地址”进行模糊搜索；点击<img src="images/index/order_icon.png" alt="服务器列表页面">，支持自定义排序。
                     <div class="img-box">
-                        <img src="Hive Miner" alt="服务器筛选控件">
+                        <img src="images/index/server_list_opt.png" alt="服务器筛选控件">
                     </div>
                 </li>
                 <li>
@@ -713,7 +714,7 @@
                     <strong>服务器信息卡片全部信息展示</strong>：
                     <p>点击非IP区域展开显示服务器全部信息。</p>
                     <div class="img-box">
-                        <img src="服务器列表" alt="服务器全部信息">
+                        <img src="images/index/server_info_more.png" alt="服务器全部信息">
                     </div>
                     <ul>
                         <li>配置区域：展示该服务器支持的币种（如 BTC、LTC、BEL 等）</li>
@@ -723,7 +724,7 @@
                 <li>
                     <strong>快速切换分组</strong>：进入分组详情页面后，可将鼠标移入至顶部分组名处快速切换至其他分组
                     <div class="img-box">
-                        <img src="Hive Miner" alt="快速切换分组">
+                        <img src="images/index/top_change_group.png" alt="快速切换分组">
                     </div>
                 </li>
             </ol>
@@ -811,56 +812,463 @@
                 <li>局部配置的修改仅影响当前服务器，不会改变平台的全局配置状态</li>
             </ul>
 
-            <h2 id="server-detail">3.4 服务器详情页面（未完）</h2>
+            <h2 id="server-detail">3.4 服务器详情页面</h2>
             <div class="img-box">
-                <img src="tmp/299356901890_docxword_media_image24.png" alt="服务器详情页面">
+                <img src="images/index/server_detail/index.png" alt="服务器详情页面">
             </div>
-            <p>进入路径：首页 → 分组列表 → 点击目标分组的服务器条目的IP地址，即可进入本页面。包含“代理”“飞行表”“矿工”“矿机”“统计”“设定”6个标签页，均为当前服务器的局部配置（仅适用于本分组），以下按标签页依次说明 。 </p>
+            <p>进入路径：首页 → 分组列表 → 点击目标分组的服务器条目的IP地址，即可进入本页面。包含“总览”“飞行表”“矿工”“矿机”“统计”“设定”6个标签页，均为当前服务器的局部配置（仅适用于本分组），以下按标签页依次说明 。 </p>
 
-            <h3>3.4.1 代理标签页</h3>
+            <h3>3.4.1 总览标签页</h3>
             <h4>3.4.1.1 界面元素说明</h4>
-            <p>（文档未完待补充）</p>
+            <div class="img-box">
+                <img src="images/index/server_detail/index.png" alt="服务器详情页面">
+            </div>
+			<ul>
+				<li><span class="bold-text">顶部服务器基础信息区</span>：
+					<ul>
+						<li>服务器标识：显示服务器 IP（如 “47.239.116.216”）及系统类型（如 “linux”）</li>
+						<li>提示文字：“真实客户调试数据不轻易改动”，标注数据属性，对服务器进行备注</li>
+						<li>基础信息栏：包含 “安装日期”“运行时长”“IP” 等服务器核心基础信息</li>
+						<li>支持币种标签：展示该服务器可适配的挖矿币种（如 BTC、ZEC、ETC 等）</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">标签导航栏</span>：
+					<ul>
+						<li>包含 “总览”“飞行表”“矿工”“矿机”“统计”“日志”“设定” 标签，当前选中 “总览”</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">币种算力统计表格</span>：
+					<ul>
+						<li>列标题：“COIN”“币种”“算法”“算力”“端口”“提交”“作者”“用户”“延迟”</li>
+						<li>表格内容：按币种展示对应挖矿数据（如 COIN 1 对应 BTC，算法 SHA256d，算力 15.70Ph/s 等），部分未运行币种算力显示为 “0H/s”</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">系统配置信息区</span>：
+					<ul>
+						<li>矿工版本标识：显示当前使用的矿工版本（如 “v0.1.053@251230”）</li>
+						<li>硬件信息：包含 “Physical ID”：物理ID“CPU 型号”“Thread Count（线程数）”</li>
+						<li>系统信息：包含 “System type（操作系统，当前表示服务器是linux操作系统）”“Kernel（内核版本）”“Local IP 内核服务器IP”“Remote IP 管理服务器IP”“MAC Address”</li>
+						<li>注意：点击<img src="images/index/server_detail/copy.png" alt="服务器详情页面">该图标即可快速复制</li>
+					</ul>
+				</li>
+			</ul>
+			
 
             <h4>3.4.1.2 操作步骤</h4>
-            <p>（文档未完待补充）</p>
+            <ul>
+				<li><span class="bold-text">查看币种算力数据</span>：
+					<ul>
+						<li>直接在 “币种算力统计表格” 中查看各币种的算法、算力、延迟等实时运行数据；定位目标币种（如 BTC），查看其对应的算力、提交量等核心指标。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">查看服务器基础信息</span>：
+					<ul>
+						<li>在 “顶部服务器基础信息区” 查看安装日期、运行时长、IP 等静态配置信息；</li>
+						<li>在 “系统配置信息区” 查看 CPU 型号、线程数、MAC 地址等硬件 / 系统参数。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">切换功能标签页</span>：
+					<ul>
+						<li>点击标签导航栏中的 “飞行表”“矿工” 等标签，可切换至对应功能页面进行操作。</li>
+					</ul>
+				</li>
+			</ul>
 
             <h3>3.4.2 飞行表标签页</h3>
             <h4>3.4.2.1 界面元素说明</h4>
-            <p>（文档未完待补充）</p>
+            <div class="img-box">
+                <img src="images/index/server_detail/fry_list.png" alt="飞行表标签页">
+            </div>
+			<ul>
+				<li><span class="bold-text">顶部标签导航栏：</span>
+					<ul>
+						<li>包含 “总览”“飞行表”“矿工” 等功能标签，当前选中 “飞行表”；</li>
+						<li>右上角设有 “前往飞行表管理页面” 链接，点击可跳转至平台全局飞行表管理界面。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">飞行表分组区域：</span>
+					<ul>
+						<li>分组名称：显示 “真实客户测试数据不要轻易改动”，名称右侧配备编辑图标（铅笔），用于修改分组信息；</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">飞行表配置列表：</span>：每个条目对应单个币种的飞行表配置，包含以下模块
+					<ul>
+						<li>配置基础信息：配置名称（如 “测试”“鱼池”）、币种标识（如 BTC、ZEC）及状态（如 “无抽水信息”）；</li>
+						<li>矿池连接信息：PoolUrls（矿池地址，如ss.antpool.com:3333）；</li>
+						<li>运行参数：端口、协议（如stratum+tcp）、FAST 状态、矿池模式、抽水状态、本地算力；</li>
+						<li>操作控件：<img src="images/index/server_detail/opt.png" alt="飞行表标签页">每个配置右侧配备编辑（铅笔图标）、复制（方框图标）、删除（垃圾桶图标）按钮。</li>
+						<li>功能按钮：页面左下角设有 “载入飞行表” 按钮，用于加载已预设的飞行表配置文件。</li>
+					</ul>
+				</li>
+			</ul>
 
             <h4>3.4.2.2 操作步骤</h4>
-            <p>（文档未完待补充）</p>
+            <ul>
+				<li><span class="bold-text">查看飞行表配置：</span>
+					<ul>
+						<li>直接在 “飞行表配置列表” 中查看各币种对应的矿池地址、端口、协议等实时运行参数，定位目标币种（如 BTC）即可获取其完整配置信息。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">编辑飞行表参数：</span>
+					<ul>
+						<li>点击目标配置右侧的铅笔图标，进入配置编辑界面，修改矿池地址、端口、协议等参数后，点击 “保存” 按钮完成配置更新。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">复制 / 删除飞行表配置：</span>
+					<ul>
+						<li>复制：点击目标配置右侧的方框图标，可快速复制当前配置生成新的飞行表条目；</li>
+						<li>删除：点击目标配置右侧的垃圾桶图标，在弹出的确认提示框中点击 “确认”，完成该飞行表配置的删除。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">载入预设飞行表：</span>
+					<ul>
+						<li>点击页面左下角 “载入飞行表” 按钮，在弹出的文件选择界面中，选择匹配当前服务器币种的预设飞行表配置文件，完成配置加载。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">复制 / 删除飞行表配置：</span>
+					<ul>
+						<li>点击右上角 “前往飞行表管理页面” 链接，跳转到平台全局飞行表管理界面，进行批量配置、分组管理等操作。</li>
+					</ul>
+				</li>
+			</ul>
+			
+			<h4>3.4.2.3 注意事项</h4>
+            <ul>
+				<li>编辑飞行表参数（如矿池地址、端口）前，需确认该配置对应的矿机已停止运行，否则可能因配置冲突导致挖矿中断。</li>
+				<li>删除飞行表配置为不可逆操作，删除前需确认当前无矿机在使用该配置，避免矿机离线。</li>
+				<li>“载入飞行表” 时，需选择与当前服务器支持币种匹配的配置文件，否则配置无法正常生效。</li>
+			</ul>
 
             <h3>3.4.3 矿工标签页</h3>
             <h4>3.4.3.1 界面元素说明</h4>
-            <p>（文档未完待补充）</p>
+            <div class="img-box">
+                <img src="images/index/server_detail/kuanggong_list.png" alt="矿工标签页">
+            </div>
+			<ul>
+				<li><span class="bold-text">顶部标签导航栏：</span>
+					<ul>
+						<li>包含 “总览”“飞行表”“矿工” 等功能标签，当前选中 “矿工” 标签。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">筛选与排序控件：</span>
+					<ul>
+						<li>币种筛选标签：含 “全部”“BTC”“ETC”“ZEC”“LTC”，点击可筛选对应币种的矿工，点击“全部”加载所有数据（即恢复默认）；</li>
+						<LI>排序下拉框：默认显示 “默认排序”，展开后可选 “时长”“算力”“抽水比例”“矿机” 等排序维度；</LI>
+						<LI>搜索框：提示 “请输入矿工名称”，用于精准搜索目标矿工信息。</LI>
+					</ul>
+				</li>
+				<li><span class="bold-text">矿工数据列表：</span>
+					<ul>
+						<li>列标题包含 “名称”“时长”“矿机”“算力”“份额”“抽水份额”“抽水比例”，展示各矿工的实时运行数据（如矿工名称 “A401btc001”、算力 “137.40Th/s” 等）。</li>
+					</ul>
+				</li>
+			</ul>
 
             <h4>3.4.3.2 操作步骤</h4>
-            <p>（文档未完待补充）</p>
+            <ul>
+				<li><span class="bold-text">筛选特定币种矿工：</span>
+					<ul>
+						<li>点击币种筛选标签（如 “BTC”），列表将仅显示该币种对应的矿工数据。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">调整矿工排序方式：</span>
+					<ul>
+						<li>点击排序下拉框，选择目标维度（如 “算力”），列表将按该维度重新排序（如按算力从高到低排列）。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">搜索目标矿工：</span>
+					<ul>
+						<li>在搜索框中输入矿工名称（如 “A401btc001”），列表将快速过滤出匹配名称的矿工条目。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">查看矿工详情数据：</span>
+					<ul>
+						<li>在矿工列表中定位目标矿工，直接查看其 “时长”“矿机数量”“算力”“份额” 等实时运行指标。</li>
+					</ul>
+				</li>
+			</ul>
+			
+			<h4>3.4.3.3 注意事项</h4>
+            <ul>
+				<li>1．矿工列表数据为实时更新，若某矿工算力显示 “0H/s”，代表该矿工当前未处于运行状态；</li>
+				<li>2．同时使用 “币种筛选 + 搜索” 功能，可更精准地定位目标矿工，提升操作效率；</li>
+				<li>3．排序维度选择 “算力” 时，可快速识别当前算力最高的矿工，便于资源调度与监控。</li>
+			</ul>
 
             <h3>3.4.4 矿机标签页</h3>
             <h4>3.4.4.1 界面元素说明</h4>
-            <p>（文档未完待补充）</p>
+            <div class="img-box">
+                <img src="images/index/server_detail/kuangji_list.png" alt="矿机标签页">
+            </div>
+			<ul>
+				<li><span class="bold-text">顶部标签导航栏：</span>
+					<ul>
+						<li>包含 “总览”“飞行表”“矿工”“矿机” 等功能标签，当前选中 “矿机” 标签。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">筛选与排序控件：</span>
+					<ul>
+						<li>币种筛选标签：含 “全部”“BTC”，点击可筛选对应币种的矿机；</li>
+						<LI>排序下拉框：默认显示 “默认排序”，展开后可选 “时长”“算力”“提交”“抽水” 等排序维度；</LI>
+						<LI>搜索框：提示 “请输入矿机名称”，用于精准搜索目标矿机。</LI>
+					</ul>
+				</li>
+				<li><span class="bold-text">矿机数据列表：</span>
+					<ul>
+						<li>列标题：包含 “矿机名（含 IP）”“时长”“算力”“提交”“抽水”“上次发现”“状态”“矿工”，同时每条矿机前配备复选框（用于批量操作）；</li>
+						<li>状态标识：通过颜色圆点区分矿机状态（如红色代表离线、绿色代表在线）；</li>
+						<li>数据内容：展示各矿机的实时运行指标（如矿机 “002” 算力 “128.23Th/s”、提交量 “2.64K” 等）。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">分页控件：</span>
+					<ul>
+						<li>位于页面底部，显示 “共 284 条”“10 条 / 页”，配备页码切换按钮（1、2…29）及 “前往” 功能，用于浏览多页矿机数据。</li>
+					</ul>
+				</li>
+			</ul>
 
             <h4>3.4.4.2 操作步骤</h4>
-            <p>（文档未完待补充）</p>
+            <ul>
+				<li><span class="bold-text">筛选特定币种矿机：</span>
+					<ul>
+						<li>点击币种筛选标签（如 “BTC”），列表将仅显示该币种对应的矿机数据。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">调整矿机排序方式：</span>
+					<ul>
+						<li>点击排序下拉框，选择目标维度（如 “算力”），列表将按该维度重新排序（如按算力从高到低排列）。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">搜索目标矿机：</span>
+					<ul>
+						<li>在搜索框中输入矿机名称（如 “002”），列表将快速过滤出匹配名称的矿机条目。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">查看矿机详情数据：</span>
+					<ul>
+						<li>在矿机列表中定位目标矿机，直接查看其 “时长”“算力”“提交量”“状态” 等实时运行指标，通过颜色圆点识别矿机在线 / 离线状态。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">浏览多页矿机数据：</span>
+					<ul>
+						<li>点击页码按钮（如 “2”），切换至对应页码的矿机列表；（可选）调整 “10 条 / 页” 下拉框，修改单页显示的矿机数量后，重新浏览。</li>
+					</ul>
+				</li>
+			</ul>
+			
+			<h4>3.4.4.3 注意事项</h4>
+            <ul>
+				<li>1．矿机状态圆点的含义：红色代表矿机当前离线，绿色代表矿机当前在线，可通过该标识快速判断矿机运行状态；</li>
+				<li>2．矿机列表前的复选框支持批量操作（如批量重启、批量删除），勾选目标矿机后，需结合平台后续功能按钮执行操作；</li>
+				<li>3．若矿机 “上次发现” 时间显示为 “3 小时前”（如矿机 “002”），需结合状态圆点确认矿机是否处于异常离线状态；</li>
+				<li>4．分页浏览时，建议先通过 “筛选 + 搜索” 缩小范围，再进行页码切换，提升浏览效率。</li>
+			</ul>
 
             <h3>3.4.5 统计标签页</h3>
             <h4>3.4.5.1 界面元素说明</h4>
-            <p>（文档未完待补充）</p>
+            <div class="img-box">
+                <img src="images/index/server_detail/tongji.png" alt="统计标签页">
+            </div>
+			<ul>
+				<li><span class="bold-text">时间控制区域：</span>
+					<ul>
+						<li>时间切换按钮：包含 “上一个”“下一个”，用于切换统计日期；</li>
+						<li>日期选择框：显示当前统计日期（如 “2025 年 12 月 30 日”），支持选择指定日期；</li>
+						<li>时间范围按钮：含 “1d”“7d”“30d”，对应 “1 天”“7 天”“30 天” 的统计周期，当前选中 “1d”。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">筛选控件：</span>
+					<ul>
+						<li>币种下拉框：当前选中 “GRIN”，用于选择需要统计的目标币种；</li>
+						<LI>数据类型标签：含 “All”“User”“Avg”“Fee”，对应不同统计维度，当前选中 “All”。</LI>
+					</ul>
+				</li>
+				<li><span class="bold-text">统计图表区域：</span>
+					<ul>
+						<li>图表标题：“算力”，明确统计指标；</li>
+						<li>数据图例：标注 “User”“Avg”“Fee” 对应的统计维度；</li>
+						<li>数据状态：当前显示 “暂无统计数据”，代表所选条件下无可用统计信息。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">分页控件：</span>
+					<ul>
+						<li>位于页面底部，显示 “共 284 条”“10 条 / 页”，配备页码切换按钮（1、2…29）及 “前往” 功能，用于浏览多页矿机数据。</li>
+					</ul>
+				</li>
+			</ul>
 
             <h4>3.4.5.2 操作步骤</h4>
-            <p>（文档未完待补充）</p>
-
-            <h3>3.4.6 设定标签页</h3>
+            <ul>
+				<li><span class="bold-text">1．切换统计时间周期：</span>
+					<ul>
+						<li>点击 “1d”“7d”“30d” 按钮，切换至对应时间范围（1 天 / 7 天 / 30 天）的算力统计数据。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">2．选择目标统计币种：</span>
+					<ul>
+						<li>点击币种下拉框，选择需要查看的币种（如 “GRIN”），图表将加载该币种的统计数据。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">3．切换数据统计维度：</span>
+					<ul>
+						<li>点击 “User”“Avg”“Fee” 标签，分别查看 “用户算力”“平均算力”“抽水算力” 的专项统计数据。</li>
+					</ul>
+				</li>
+			</ul>
+			
+			<h4>3.4.5.3 注意事项</h4>
+            <ul>
+				<li>1．若显示 “暂无统计数据”，可能是该币种在所选时间范围内无运行记录，可尝试更换时间周期（如从 “1d” 切换为 “7d”）或更换统计币种。</li>
+				<li>2．数据类型标签的对应维度：“User” 为当前用户的实际算力、“Avg” 为该币种的平均算力、“Fee” 为抽水相关的算力，按需选择对应维度查看。</li>
+				<li>3．统计数据为历史运行数据汇总，不会实时刷新，若需查看实时数据，可切换至 “总览” 标签页。</li>
+			</ul>
+			
+			<h3>3.4.6 日志标签页</h3>
             <h4>3.4.6.1 界面元素说明</h4>
-            <p>（文档未完待补充）</p>
+			<div class="img-box">
+                <img src="images/index/server_detail/log_opt.png" alt="日志标签页">
+            </div>
+            <ul>
+				<li><span class="bold-text">日志控制栏：</span>
+					<ul>
+						<li>操作按钮：包含 “开始”“暂停”“清空屏”“小自动滚动”，分别用于控制日志的实时刷新、暂停刷新、清空当前显示内容、切换日志自动滚动状态；</li>
+						<li>日志级别筛选：配备 “DEBUG”“INFO”“WARN”“ERROR”“CRIT” 级别标签，用于过滤不同严重级别的日志。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">日志显示区域：</span>
+					<ul>
+						<li>功能提示：标注 “支持 ANSI 彩色日志显示 - 可过滤不同级别的日志”；</li>
+						<li>日志内容：展示带时间戳、IP 地址、进程 ID、级别标识的日志条目，通过颜色区分不同日志级别（如 ERROR 为红色、WARN 为黄色）；</li>
+						<li>状态提示：当前含 “等待日志生成...” 的初始提示及已记录的日志内容。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">底部信息栏：</span>
+					<ul>
+						<li>展示日志当前状态（如 “运行中”）、关联服务器 IP、端口等基础信息。</li>
+					</ul>
+				</li>
+			</ul>
 
             <h4>3.4.6.2 操作步骤</h4>
-            <p>（文档未完待补充）</p>
+            <ol>
+				<li><span class="bold-text">控制日志实时刷新：</span>
+					<ul>
+						<li>点击 “开始” 按钮，启动日志的实时动态刷新，获取服务器最新运行日志；</li>
+						<li>点击 “暂停” 按钮，暂停日志刷新，静态查看当前显示的日志内容。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">筛选目标级别日志：</span>
+					<ul>
+						<li>点击日志级别标签（如 “ERROR”），日志显示区域将仅展示该级别及更高级别（如 CRIT）的日志，过滤低级别信息。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">管理日志显示效果：</span>
+					<ul>
+						<li>点击 “清空屏” 按钮，清除当前日志显示区域的所有内容，重新开始记录；</li>
+						<li>点击 “小自动滚动” 按钮，切换日志是否自动滚动至最新条目（开启后适合实时监控，关闭后便于查看历史日志）。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">查看日志详情：</span>
+					<ul>
+						<li>在日志显示区域，通过时间戳、IP、进程 ID 定位目标日志，结合颜色标识（如红色对应 ERROR）快速识别异常日志内容。</li>
+					</ul>
+				</li>
+			</ol>
 
-            <h3>3.4.7 注意事项</h3>
-            <p>（文档未完待补充）</p>
+            <h3>3.4.6.3 注意事项</h3>
+            <ul>
+				<li>1．日志级别优先级：CRIT（最高）> ERROR > WARN > INFO > DEBUG（最低），筛选某级别时会自动包含更高级别的日志，避免遗漏严重信息。</li>
+				<li>2．“小自动滚动” 功能：开启后日志会持续滚动到最新条目，适合实时监控；查看历史日志时建议关闭，避免滚动干扰阅读。</li>
+				<li>3．“清空屏” 仅清除当前显示的日志内容，不会删除服务器后台存储的日志记录，可放心用于清理显示界面。</li>
+				<li>4．日志的颜色标识与级别绑定（如 ERROR 为红色、WARN 为黄色），可通过颜色快速定位异常日志，提升故障排查效率。</li>
+			</ul>
+			
+			<h3>3.4.7 设定标签页</h3>
+            <h4>3.4.7.1 界面元素说明</h4>
+			<div class="img-box">
+                <img src="images/index/server_detail/server_setting.png" alt="服务器设定页面">
+            </div>
+            <ul>
+				<li><span class="bold-text">基础信息区域</span>：包含当前服务器核心配置项，支持查看与编辑
+					<ul>
+						<li>分组：展示当前服务器所属分组（示例：tanke），不可编辑</li>
+						<li>内核UUID输入框：展示服务器内核唯一标识，支持手动编辑修改</li>
+						<li>名称输入框：展示当前服务器名称（示例：47.239.116.216），支持自定义修改</li>
+						<li>描述输入框：占位提示「请输入描述」，用于填写服务器备注、说明类信息</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">标签配置区域</span>：支持自定义标签管理
+					<ul>
+						<li>已选标签栏：展示已添加标签（示例：linux），标签右侧带「×」按钮，点击可快速删除</li>
+						<li>功能提示：标注「给服务器添加自定义标签」，支持新增个性化分类标签</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">操作按钮区域</span>：核心功能执行入口，位于页面中部
+					<ul>
+						<li>「更新内核」按钮：触发服务器内核版本升级、内核配置更新操作</li>
+						<li>「发送」按钮：实现「重新发送所有配置文件」功能，将平台配置同步至服务器端</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">系统配置区域</span>：服务器运行参数精细化配置区
+					<ul>
+						<li>系统启动时关闭内置WEBU：下拉选择控件，可选「WEBU关闭」「WEBU开启」，控制服务器开机自启时的内置WEBU服务状态</li>
+						<li>推送间隔：下拉选择控件（示例：30秒），自定义服务器向平台推送状态数据的时间间隔</li>
+						<li>每月总流量设置：组合控件，含数值输入框（示例：4000）+ 单位下拉框（示例：MB），用于配置服务器月度流量上限</li>
+					</ul>
+				</li>
+				<li><span class="bold-text red-text">危险操作区域</span>：高风险功能入口，醒目红色样式
+					<ul>
+						<li>「移除内核」按钮：执行服务器内核配置的删除操作，操作不可逆</li>
+					</ul>
+				</li>
+			</ul>
+
+            <h4>3.4.7.2 操作步骤</h4>
+            <ol>
+				<li><span class="bold-text">基础信息修改操作</span>
+					<ul>
+						<li>点击「名称」/「描述」输入框，输入目标内容，输入完成后页面自动生效保存；</li>
+						<li>内核UUID为核心标识，非业务必要请勿修改；如需调整，点击UUID输入框填写新标识后完成保存。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">标签管理操作</span>
+					<ul>
+						<li>添加标签：在标签输入区填写自定义标签内容，按下回车键即可完成新增；</li>
+						<li>删除标签：点击已选标签右侧的「×」按钮，确认后完成标签移除。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">配置同步与内核更新</span>
+					<ul>
+						<li>内核升级：点击「更新内核」按钮，等待系统完成内核版本检测、下载与升级，期间请勿刷新页面；</li>
+						<li>配置推送：点击「发送」按钮，系统自动将最新配置文件同步至服务器，完成全量配置更新。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text">系统参数配置操作</span>
+					<ul>
+						<li>WEBU服务控制：点击「系统启动时关闭内置WEBU」下拉框，选择「开启/关闭」选项，选择后即时生效；</li>
+						<li>调整推送间隔：点击推送间隔下拉框，按需选择目标时间档位，完成运行参数调整；</li>
+						<li>流量限额设置：在数值框填写月度流量上限，下拉选择单位（MB/GB），配置后服务器将按限额管控流量使用。</li>
+					</ul>
+				</li>
+				<li><span class="bold-text red-text">移除内核操作（谨慎执行）</span>
+					<ul>
+						<li>确认服务器已停止运行、内核配置无需保留后，点击红色「移除内核」按钮；</li>
+						<li>在弹出的二次确认弹窗中，点击「确认」按钮，完成内核配置的永久删除。</li>
+					</ul>
+				</li>
+				<div class="img-box">
+					<img src="images/index/server_detail/remove.png" alt="移除内核">
+				</div>
+			</ol>
+
+            <h3>3.3.6 注意事项</h3>
+            <ul>
+				<li>内核UUID是服务器内核的唯一识别标识，非技术调试、业务迁移场景，严禁随意修改，避免内核无法被平台识别、服务器离线故障；</li>
+				<li><span class="red-text">「移除内核」为高危不可逆操作</span>，执行后服务器内核配置将永久删除，且无法恢复，操作前必须确认服务器已下线、无业务运行；</li>
+				<li>每月总流量限额配置生效后，服务器月度流量消耗达到阈值时，将自动停止网络服务，需根据业务需求合理设置数值；</li>
+				<li>点击「更新内核」后，服务器将临时断开连接完成升级，升级时长根据网络、内核版本差异有所不同，耐心等待即可；</li>
+				<li>配置修改后若未即时生效，可刷新页面重新加载，或点击「发送」按钮手动推送配置文件。</li>
+			</ul>
         </section>
 
         <!-- 四、钱包界面 -->
@@ -869,7 +1277,7 @@
 
             <h2 id="wallet-elements">4.1 界面元素说明</h2>
             <div class="img-box">
-                <img src="tmp/299356901890_docxword_media_image25.png" alt="钱包界面">
+                <img src="images/wallet/main.png" alt="钱包界面">
             </div>
             <ol>
                 <li>
@@ -893,7 +1301,7 @@
                         <li>区域标题：“用户钱包”，明确当前页面的管理对象</li>
                         <li>“添加钱包”按钮：位于区域右上角，用于发起新增钱包的操作</li>
                         <div class="img-box">
-                            <img src="+" alt="添加钱包界面">
+                            <img src="images/wallet/add.png" alt="添加钱包界面">
                         </div>
                         <li>全局钱包说明框：提示“全局钱包可以在你所有的代理服务器中同时使用并且也可以使用到全局飞行表中和代理飞行表”，说明全局钱包的适用范围</li>
                     </ul>
@@ -902,7 +1310,7 @@
                     <strong>币种筛选标签组</strong>
                     <p>标签组根据用户钱包列表数据，按币种类型分组提取显示。截图中包含“ALEO_JINGLE”“BEL”“ALEO_ICERIVER”三个币种标签，点击对应标签可筛选显示该币种的钱包信息，再次点击可取消筛选。</p>
                     <div class="img-box">
-                        <img src="tmp/299356901890_docxword_media_image27.png" alt="币种筛选标签">
+                        <img src="images/wallet/shaixuan.png" alt="币种筛选标签">
                     </div>
                 </li>
                 <li>
@@ -961,7 +1369,7 @@
 
             <h2 id="flytable-elements">5.1 界面元素说明</h2>
             <div class="img-box">
-                <img src="Hive Miner" alt="飞行表界面">
+                <img src="images/fry_table/main.png" alt="飞行表界面">
             </div>
             <ol>
                 <li>
@@ -985,17 +1393,17 @@
                     <p>以“global_fly_teste”分组为例：</p>
                     <ul>
                         <li>分组名称：显示为“global_fly_teste”</li>
-                        <li>分组操作按钮（名称右侧）：星星图标（收藏）、“➕”图标（添加子项）、铅笔图标（编辑）、复制图标（复制配置）、垃圾桶图标（删除）</li>
+                        <li>分组操作按钮（名称右侧）：<img src="images/fry_table/star.png" alt="">星星图标（收藏/取消收藏）、<img src="images/fry_table/add.png" alt="">图标（添加）、<img src="images/fry_table/edit.png" alt="">铅笔图标（编辑）、<img src="images/fry_table/copy.png" alt="">复制图标（复制配置）、<img src="images/fry_table/delete.png" alt="">垃圾桶图标（删除）</li>
                         <li>分组子项区域：展示该分组下的具体飞行表配置（如“tanke”“tanke - copy”子项）</li>
                     </ul>
                 </li>
                 <li>
                     <strong>飞行表子项信息</strong>
                     <div class="img-box">
-                        <img src="global fly teste" alt="飞行表子项信息">
+                        <img src="images/fry_table/list.png" alt="飞行表子项信息">
                     </div>
                     <div class="img-box">
-                        <img src="配置抽水" alt="飞行表配置详情">
+                        <img src="images/fry_table/setting.png" alt="飞行表配置详情">
                     </div>
                     <p>每个飞行表可以添加多个配置，信息包含：</p>
                     <ul>
@@ -1030,7 +1438,7 @@
 
             <h2 id="pool-elements">6.1 界面元素说明</h2>
             <div class="img-box">
-                <img src="Hive Miner" alt="矿池界面">
+                <img src="images/pool/main.png" alt="矿池界面">
             </div>
             <ol>
                 <li>顶部导航区：与前序页面一致。</li>
@@ -1056,7 +1464,7 @@
                 <li>
                     <strong>添加新矿池</strong>：点击“添加矿池”按钮，填写币种、名字、地址后提交。
                     <div class="img-box">
-                        <img src="Hive Miner" alt="添加矿池界面">
+                        <img src="images/pool/add.png" alt="添加矿池界面">
                     </div>
                 </li>
                 <li>筛选币种矿池：点击目标币种标签，表格仅显示该币种矿池。</li>
@@ -1080,7 +1488,7 @@
             <h2 id="telegram">7.1 Telegram通知标签页</h2>
             <h3>7.1.1 界面元素说明</h3>
             <div class="img-box">
-                <img src="test" alt="Telegram通知界面">
+                <img src="images/event/main.png" alt="Telegram通知界面">
             </div>
             <ol>
                 <li>标签标识：当前选中“Telegram”标签。</li>
@@ -1100,7 +1508,7 @@
             <h2 id="email">7.2 邮件通知标签页</h2>
             <h3>7.2.1 界面元素说明</h3>
             <div class="img-box">
-                <img src="Hive Miner" alt="邮件通知界面">
+                <img src="images/event/email_setting.png" alt="邮件通知界面">
             </div>
             <ol>
                 <li>标签标识：当前选中“邮件”标签。</li>
@@ -1119,7 +1527,7 @@
             <h2 id="serverchan">7.3 Server酱通知标签页</h2>
             <h3>7.3.1 界面元素说明</h3>
             <div class="img-box">
-                <img src="Hive Miner" alt="Server酱通知界面">
+                <img src="images/event/sever_setting.png" alt="Server酱通知界面">
             </div>
             <ol>
                 <li>标签标识：当前选中“Server酱”标签。</li>
@@ -1153,7 +1561,7 @@
 
             <h2 id="stats-elements">8.1 界面元素说明</h2>
             <div class="img-box">
-                <img src="tmp/299356901890_docxword_media_image41.png" alt="公共统计界面">
+                <img src="images/common_static/main.png" alt="公共统计界面">
             </div>
             <ol>
                 <li>
@@ -1219,7 +1627,7 @@
             <h2 id="account-profile">9.1 账号标签页</h2>
             <h3>9.1.1 界面元素说明</h3>
             <div class="img-box">
-                <img src="Hive Miner" alt="账号标签页">
+                <img src="images/account/main.png" alt="账号标签页">
             </div>
             <ol>
                 <li>顶部标签栏：包含 “账号”“密码”“验证器”“会话”“活动” 标签，当前选中 “账号”。</li>
@@ -1251,7 +1659,7 @@
             <h2 id="account-password">9.2 密码标签页</h2>
             <h3>9.2.1 界面元素说明</h3>
             <div class="img-box">
-                <img src="Hive Miner" alt="密码标签页">
+                <img src="images/account/password_edit.png" alt="密码标签页">
             </div>
             <ol>
                 <li>顶部标签栏：当前选中 “密码” 标签。</li>
@@ -1285,7 +1693,7 @@
             <h2 id="account-verifier">9.3 验证器标签页</h2>
             <h3>9.3.1 界面元素说明</h3>
             <div class="img-box">
-                <img src="Hive Miner" alt="验证器标签页">
+                <img src="images/account/validator.png" alt="验证器标签页">
             </div>
             <ol>
                 <li>顶部标签栏：当前选中 “验证器” 标签。</li>
@@ -1324,7 +1732,7 @@
             <h2 id="account-session">9.4 会话标签页</h2>
             <h3>9.4.1 界面元素说明</h3>
             <div class="img-box">
-                <img src="Hive Miner" alt="会话标签页">
+                <img src="images/account/session.png" alt="会话标签页">
             </div>
             <ol>
                 <li>顶部标签栏：当前选中 “会话” 标签。</li>
@@ -1335,11 +1743,11 @@
                         <li>开关控件：控制 Token 的启用 / 禁用状态</li>
                         <li>“显示” 按钮：查看完整的 API Key 内容</li>
                         <div class="img-box">
-                            <img src="Hive Miner" alt="显示API Key">
+                            <img src="images/account/session_show.png" alt="显示API Key">
                         </div>
                         <li>“编辑” 按钮：修改 Token 的关联配置</li>
                         <div class="img-box">
-                            <img src=" Hive Miner v" alt="编辑API Token">
+                            <img src="images/account/session_edit.png" alt="编辑API Token">
                         </div>
                         <li>“撤销” 按钮：删除该 Token</li>
                         <li>“生成新的个人 Token” 按钮：创建新的 API Token 用于第三方应用授权。</li>
@@ -1363,7 +1771,7 @@
             <h2 id="account-activity">9.5 活动标签页</h2>
             <h3>9.5.1 界面元素说明</h3>
             <div class="img-box">
-                <img src="Hive Miner" alt="活动标签页">
+                <img src="images/account/record.png" alt="活动标签页">
             </div>
             <ol>
                 <li>顶部标签栏：当前选中 “活动” 标签。</li>
