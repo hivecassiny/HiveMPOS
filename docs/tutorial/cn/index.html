@@ -1990,7 +1990,7 @@
                     return false;
                 }
                 
-                // 关闭菜单的函数
+                // 关闭菜单的函数（恢复滚动位置，但不触发滚动动画）
                 function closeMenu() {
                     const sidebarElement = document.getElementById('sidebar');
                     if (sidebarElement) {
@@ -2001,15 +2001,79 @@
                         if (menuButton) {
                             menuButton.textContent = '☰ 菜单';
                         }
-                        // 恢复背景滚动
+                        // 恢复背景滚动，静默恢复位置（不使用滚动动画）
                         if (window.innerWidth <= 768) {
-                            const scrollY = document.body.style.top;
+                            // 获取保存的滚动位置
+                            const savedScroll = document.body.style.top;
+                            const scrollValue = savedScroll ? Math.abs(parseInt(savedScroll.replace('px', '')) || 0) : 0;
+                            
+                            // 临时禁用平滑滚动
+                            const htmlElement = document.documentElement;
+                            const originalScrollBehavior = htmlElement.style.scrollBehavior;
+                            htmlElement.style.scrollBehavior = 'auto';
+                            
+                            // 移除fixed定位和保存的top值
                             document.body.classList.remove('menu-open');
                             document.body.style.top = '';
-                            // 恢复滚动位置
-                            if (scrollY) {
-                                window.scrollTo(0, parseInt(scrollY || '0') * -1);
+                            
+                            // 立即设置滚动位置（在移除fixed后）
+                            if (scrollValue > 0) {
+                                // 直接设置 scrollTop，不触发滚动事件和动画
+                                document.documentElement.scrollTop = scrollValue;
+                                document.body.scrollTop = scrollValue;
+                                // 强制同步，确保立即生效
+                                void document.documentElement.offsetHeight;
+                                void document.body.offsetHeight;
                             }
+                            
+                            // 恢复平滑滚动设置
+                            setTimeout(function() {
+                                htmlElement.style.scrollBehavior = originalScrollBehavior || '';
+                            }, 100);
+                        }
+                    }
+                }
+                
+                // 只关闭菜单显示，静默恢复滚动位置（用于遮罩层点击，不触发滚动动画）
+                function closeMenuOnly() {
+                    const sidebarElement = document.getElementById('sidebar');
+                    if (sidebarElement) {
+                        sidebarElement.classList.remove('active');
+                        if (overlay) {
+                            overlay.classList.remove('active');
+                        }
+                        if (menuButton) {
+                            menuButton.textContent = '☰ 菜单';
+                        }
+                        // 恢复背景滚动，静默恢复位置（不使用滚动动画）
+                        if (window.innerWidth <= 768) {
+                            // 获取保存的滚动位置
+                            const savedScroll = document.body.style.top;
+                            const scrollValue = savedScroll ? Math.abs(parseInt(savedScroll.replace('px', '')) || 0) : 0;
+                            
+                            // 临时禁用平滑滚动
+                            const htmlElement = document.documentElement;
+                            const originalScrollBehavior = htmlElement.style.scrollBehavior;
+                            htmlElement.style.scrollBehavior = 'auto';
+                            
+                            // 移除fixed定位和保存的top值
+                            document.body.classList.remove('menu-open');
+                            document.body.style.top = '';
+                            
+                            // 立即设置滚动位置（在移除fixed后）
+                            if (scrollValue > 0) {
+                                // 直接设置 scrollTop，不触发滚动事件和动画
+                                document.documentElement.scrollTop = scrollValue;
+                                document.body.scrollTop = scrollValue;
+                                // 强制同步，确保立即生效
+                                void document.documentElement.offsetHeight;
+                                void document.body.offsetHeight;
+                            }
+                            
+                            // 恢复平滑滚动设置
+                            setTimeout(function() {
+                                htmlElement.style.scrollBehavior = originalScrollBehavior || '';
+                            }, 100);
                         }
                     }
                 }
@@ -2047,18 +2111,18 @@
                     handleMenuToggle(e);
                 }, { passive: false });
                 
-                // 点击遮罩层关闭菜单
+                // 点击遮罩层关闭菜单（不恢复滚动位置）
                 if (overlay) {
                     overlay.addEventListener('click', function(e) {
                         e.preventDefault();
                         e.stopPropagation();
-                        closeMenu();
+                        closeMenuOnly();
                     });
                     
                     overlay.addEventListener('touchstart', function(e) {
                         e.preventDefault();
                         e.stopPropagation();
-                        closeMenu();
+                        closeMenuOnly();
                     }, { passive: false });
                 }
                 
