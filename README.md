@@ -1,7 +1,7 @@
 &nbsp;
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="img/log.svg">
+    <source media="(prefers-color-scheme: dark)" srcset="img/logo.svg">
     <img alt="AdGuard Home" src="img/log.svg" width="100px">
   </picture>
 </p>
