@@ -4,7 +4,7 @@
 
 # ==================== 全局变量配置 ====================
 # 脚本版本
-SCRIPT_VERSION="1.0.20"
+SCRIPT_VERSION="1.0.21"
 
 # 软件信息
 SOFTWARE_NAME="hivempos"
@@ -270,11 +270,11 @@ show_access_url() {
     fi
     
     # 获取内网IP
-    local local_ip=$(get_local_ip)
-    if [[ -n "$local_ip" ]]; then
-        echo -e "$(print_message local_ip): ${BLUE}$local_ip${NC}"
-        echo -e "$(print_message access_url): ${YELLOW}http://$local_ip:10000${NC}"
-    fi
+    # local local_ip=$(get_local_ip)
+    # if [[ -n "$local_ip" ]]; then
+    #     echo -e "$(print_message local_ip): ${BLUE}$local_ip${NC}"
+    #     echo -e "$(print_message access_url): ${YELLOW}http://$local_ip:10000${NC}"
+    # fi
     
     echo "=========================================="
     echo ""
