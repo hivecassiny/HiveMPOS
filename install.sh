@@ -4,7 +4,7 @@
 
 # ==================== 全局变量配置 ====================
 # 脚本版本
-SCRIPT_VERSION="1.0.19"
+SCRIPT_VERSION="1.0.20"
 
 # 软件信息
 SOFTWARE_NAME="hivempos"
@@ -42,6 +42,7 @@ LANG_STRINGS[1,unable_get_public_ip]="无法获取公网IP，请检查网络"
 LANG_STRINGS[1,script_version]="脚本版本"
 LANG_STRINGS[1,software_version]="软件版本"
 LANG_STRINGS[1,default_port]="首次运行没有账号密码浏览器直接访问"
+LANG_STRINGS[1,default_port_self]="本机访问"
 LANG_STRINGS[1,menu_title]="请选择操作"
 LANG_STRINGS[1,menu_install]="1. 安装"
 LANG_STRINGS[1,menu_uninstall]="2. 卸载"
@@ -127,6 +128,7 @@ LANG_STRINGS[2,unable_get_public_ip]="Unable to get public IP, check network"
 LANG_STRINGS[2,script_version]="Script Version"
 LANG_STRINGS[2,software_version]="Software Version"
 LANG_STRINGS[2,default_port]="First run without account password browser direct access"
+LANG_STRINGS[2,default_port_self]="local host access"
 LANG_STRINGS[2,menu_title]="Please select an operation"
 LANG_STRINGS[2,menu_install]="1. Install"
 LANG_STRINGS[2,menu_uninstall]="2. Uninstall"
@@ -243,7 +245,6 @@ get_local_ip() {
     elif command -v hostname &> /dev/null; then
         local_ip=$(hostname -I | awk '{print $1}' 2>/dev/null)
     fi
-    
     if [[ -z "$local_ip" ]]; then
         echo "127.0.0.1"
     else
@@ -788,8 +789,9 @@ show_menu() {
     echo "=========================================="
     echo "$(print_message script_version): $SCRIPT_VERSION"
     echo "$(print_message software_version): $SOFTWARE_VERSION"
-    #local current_ip=$(get_local_ip)
-    #echo -e "$(print_message default_port): ${YELLOW}http://${current_ip}:10000${NC}"
+    local current_ip=$(get_public_ip)
+    echo -e "$(print_message default_port_self): ${YELLOW}http://127.0.0.1:10000${NC}"
+    echo -e "$(print_message default_port): ${YELLOW}http://${current_ip}:10000${NC}"
     echo "=========================================="
     echo ""
     echo "$(print_message menu_title):"
