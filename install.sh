@@ -4,7 +4,7 @@
 
 # ==================== 全局变量配置 ====================
 # 脚本版本
-SCRIPT_VERSION="1.0.18"
+SCRIPT_VERSION="1.0.19"
 
 # 软件信息
 SOFTWARE_NAME="hivempos"
@@ -34,6 +34,11 @@ declare -A LANG_STRINGS
 
 # 中文字符串
 LANG_STRINGS[1,title]="=== HiveMPOS 管理脚本 ==="
+LANG_STRINGS[1,access_address]="访问地址"
+LANG_STRINGS[1,public_ip]="公网IP"
+LANG_STRINGS[1,local_ip]="内网IP"
+LANG_STRINGS[1,access_url]="请使用浏览器访问"
+LANG_STRINGS[1,unable_get_public_ip]="无法获取公网IP，请检查网络"
 LANG_STRINGS[1,script_version]="脚本版本"
 LANG_STRINGS[1,software_version]="软件版本"
 LANG_STRINGS[1,default_port]="首次运行没有账号密码浏览器直接访问"
@@ -114,6 +119,11 @@ LANG_STRINGS[1,update_confirm]="是否要更新到最新版本？ (y/n): "
 
 # 英文字符串
 LANG_STRINGS[2,title]="=== HiveMPOS Management Script ==="
+LANG_STRINGS[2,access_address]="Access Address"
+LANG_STRINGS[2,public_ip]="Public IP"
+LANG_STRINGS[2,local_ip]="Local IP"
+LANG_STRINGS[2,access_url]="Please access using browser"
+LANG_STRINGS[2,unable_get_public_ip]="Unable to get public IP, check network"
 LANG_STRINGS[2,script_version]="Script Version"
 LANG_STRINGS[2,software_version]="Software Version"
 LANG_STRINGS[2,default_port]="First run without account password browser direct access"
@@ -191,6 +201,83 @@ LANG_STRINGS[2,latest_version]="Already latest version"
 LANG_STRINGS[2,new_version_available]="New version available"
 LANG_STRINGS[2,current_version]="Current version"
 LANG_STRINGS[2,update_confirm]="Update to latest version? (y/n): "
+
+
+get_public_ip() {
+    local public_ip=""
+    
+    # 尝试多个公网IP查询服务
+    local ip_services=(
+        "https://api.ipify.org"
+        "https://ifconfig.me/ip"
+        "https://ident.me"
+        "https://ipecho.net/plain"
+        "https://icanhazip.com"
+    )
+    
+    for service in "${ip_services[@]}"; do
+        if command -v curl &> /dev/null; then
+            public_ip=$(curl -s --connect-timeout 5 "$service")
+        elif command -v wget &> /dev/null; then
+            public_ip=$(wget -qO- --timeout=5 "$service")
+        fi
+        
+        # 检查是否是有效的IP地址
+        if [[ -n "$public_ip" ]] && [[ "$public_ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "$public_ip"
+            return 0
+        fi
+    done
+    
+    echo ""
+    return 1
+}
+
+
+get_local_ip() {
+    local local_ip=""
+    
+    # 尝试获取内网IP
+    if command -v ip &> /dev/null; then
+        local_ip=$(ip route get 1 | awk '{print $NF;exit}' 2>/dev/null)
+    elif command -v hostname &> /dev/null; then
+        local_ip=$(hostname -I | awk '{print $1}' 2>/dev/null)
+    fi
+    
+    if [[ -z "$local_ip" ]]; then
+        echo "127.0.0.1"
+    else
+        echo "$local_ip"
+    fi
+}
+
+
+show_access_url() {
+    echo ""
+    echo "=========================================="
+    echo "    $(print_message access_address)"
+    echo "=========================================="
+    
+    # 获取公网IP
+    local public_ip=$(get_public_ip)
+    
+    if [[ -n "$public_ip" ]]; then
+        echo -e "$(print_message public_ip): ${GREEN}$public_ip${NC}"
+        echo -e "$(print_message access_url): ${YELLOW}http://$public_ip:10000${NC}"
+    else
+        print_warning "$(print_message unable_get_public_ip)"
+    fi
+    
+    # 获取内网IP
+    local local_ip=$(get_local_ip)
+    if [[ -n "$local_ip" ]]; then
+        echo -e "$(print_message local_ip): ${BLUE}$local_ip${NC}"
+        echo -e "$(print_message access_url): ${YELLOW}http://$local_ip:10000${NC}"
+    fi
+    
+    echo "=========================================="
+    echo ""
+}
 
 # ==================== get_latest_version_from_page函数（优化版） ====================
 get_latest_version_from_page() {
@@ -450,6 +537,7 @@ update_service() {
         # 查看服务状态
         sleep 2
         systemctl status "$SERVICE_NAME" --no-pager
+        show_access_url
     else
         print_error "$(print_message update_failed)"
         return 1
@@ -568,6 +656,8 @@ EOF
     rm -rf "/tmp/$EXTRACTED_NAME"
     
     print_success "$(print_message install_success)"
+
+    show_access_url
     
     # 询问是否重启
     print_warning "$(print_message reboot_prompt)"
@@ -698,7 +788,8 @@ show_menu() {
     echo "=========================================="
     echo "$(print_message script_version): $SCRIPT_VERSION"
     echo "$(print_message software_version): $SOFTWARE_VERSION"
-    echo -e "$(print_message default_port): ${YELLOW}http://ip:10000${NC}"
+    local current_ip=$(get_local_ip)
+    echo -e "$(print_message default_port): ${YELLOW}http://${current_ip}:10000${NC}"
     echo "=========================================="
     echo ""
     echo "$(print_message menu_title):"
