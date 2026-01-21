@@ -4,7 +4,7 @@
 
 # ==================== 全局变量配置 ====================
 # 脚本版本
-SCRIPT_VERSION="1.0.16"
+SCRIPT_VERSION="1.0.17"
 
 # 软件信息
 SOFTWARE_NAME="hivempos"
