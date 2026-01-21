@@ -4,7 +4,7 @@
 
 # ==================== 全局变量配置 ====================
 # 脚本版本
-SCRIPT_VERSION="1.0.17"
+SCRIPT_VERSION="1.0.18"
 
 # 软件信息
 SOFTWARE_NAME="hivempos"
@@ -36,7 +36,7 @@ declare -A LANG_STRINGS
 LANG_STRINGS[1,title]="=== HiveMPOS 管理脚本 ==="
 LANG_STRINGS[1,script_version]="脚本版本"
 LANG_STRINGS[1,software_version]="软件版本"
-LANG_STRINGS[1,default_port]="默认端口"
+LANG_STRINGS[1,default_port]="首次运行没有账号密码浏览器直接访问"
 LANG_STRINGS[1,menu_title]="请选择操作"
 LANG_STRINGS[1,menu_install]="1. 安装"
 LANG_STRINGS[1,menu_uninstall]="2. 卸载"
@@ -116,7 +116,7 @@ LANG_STRINGS[1,update_confirm]="是否要更新到最新版本？ (y/n): "
 LANG_STRINGS[2,title]="=== HiveMPOS Management Script ==="
 LANG_STRINGS[2,script_version]="Script Version"
 LANG_STRINGS[2,software_version]="Software Version"
-LANG_STRINGS[2,default_port]="Default port"
+LANG_STRINGS[2,default_port]="First run without account password browser direct access"
 LANG_STRINGS[2,menu_title]="Please select an operation"
 LANG_STRINGS[2,menu_install]="1. Install"
 LANG_STRINGS[2,menu_uninstall]="2. Uninstall"
@@ -698,7 +698,7 @@ show_menu() {
     echo "=========================================="
     echo "$(print_message script_version): $SCRIPT_VERSION"
     echo "$(print_message software_version): $SOFTWARE_VERSION"
-    echo "$(print_message default_port): ${YELLOW}10000${NC}"
+    echo -e "$(print_message default_port): ${YELLOW}http://ip:10000${NC}"
     echo "=========================================="
     echo ""
     echo "$(print_message menu_title):"
