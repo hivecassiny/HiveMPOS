@@ -788,8 +788,8 @@ show_menu() {
     echo "=========================================="
     echo "$(print_message script_version): $SCRIPT_VERSION"
     echo "$(print_message software_version): $SOFTWARE_VERSION"
-    local current_ip=$(get_local_ip)
-    echo -e "$(print_message default_port): ${YELLOW}http://${current_ip}:10000${NC}"
+    #local current_ip=$(get_local_ip)
+    #echo -e "$(print_message default_port): ${YELLOW}http://${current_ip}:10000${NC}"
     echo "=========================================="
     echo ""
     echo "$(print_message menu_title):"
