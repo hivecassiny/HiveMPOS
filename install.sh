@@ -698,7 +698,7 @@ show_menu() {
     echo "=========================================="
     echo "$(print_message script_version): $SCRIPT_VERSION"
     echo "$(print_message software_version): $SOFTWARE_VERSION"
-    echo "$(print_message default_port): "${YELLOW}10000${NC}"
+    echo "$(print_message default_port): ${YELLOW}10000${NC}"
     echo "=========================================="
     echo ""
     echo "$(print_message menu_title):"
