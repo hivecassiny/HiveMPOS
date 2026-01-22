@@ -4,7 +4,7 @@
 
 # ==================== 全局变量配置 ====================
 # 脚本版本
-SCRIPT_VERSION="1.0.21"
+SCRIPT_VERSION="1.0.22"
 
 # 软件信息
 SOFTWARE_NAME="hivempos"
@@ -616,7 +616,8 @@ Type=simple
 User=root
 WorkingDirectory=$INSTALL_DIR
 ExecStart=$INSTALL_DIR/$SOFTWARE_NAME
-Restart=on-failure
+# Restart=on-failure
+Restart=always    # 总是重启，无论退出码是什么
 RestartSec=3
 StandardOutput=append:$LOG_DIR/service.log
 StandardError=append:$LOG_DIR/error.log
