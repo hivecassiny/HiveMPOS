@@ -4,7 +4,7 @@
 
 # ==================== 全局变量配置 ====================
 # 脚本版本
-SCRIPT_VERSION="1.0.22"
+SCRIPT_VERSION="1.0.23"
 
 # 软件信息
 SOFTWARE_NAME="hivempos"
@@ -619,6 +619,7 @@ ExecStart=$INSTALL_DIR/$SOFTWARE_NAME
 # Restart=on-failure
 Restart=always    # 总是重启，无论退出码是什么
 RestartSec=3
+StartLimitIntervalSec=0
 StandardOutput=append:$LOG_DIR/service.log
 StandardError=append:$LOG_DIR/error.log
 Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
