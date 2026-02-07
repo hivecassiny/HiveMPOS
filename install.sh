@@ -612,6 +612,7 @@ install_service() {
 [Unit]
 Description=HiveMPOS Service
 After=network.target
+StartLimitIntervalSec=0    
 
 [Service]
 Type=simple
@@ -620,7 +621,7 @@ WorkingDirectory=$INSTALL_DIR
 ExecStart=$INSTALL_DIR/$SOFTWARE_NAME
 Restart=always
 RestartSec=3
-StartLimitIntervalSec=0
+
 StandardOutput=append:$LOG_DIR/service.log
 StandardError=append:$LOG_DIR/error.log
 Environment="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
