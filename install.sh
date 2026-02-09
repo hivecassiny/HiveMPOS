@@ -6,9 +6,10 @@
 
 # ==================== 全局变量配置 ====================
 # 脚本版本
-SCRIPT_VERSION="1.0.24"
+SCRIPT_VERSION="1.0.25"
 
 # 软件信息
+SET_APP_VERSION="v0.5.8"
 SOFTWARE_NAME="hivempos"
 ARCHIVE_NAME="$SOFTWARE_NAME.tar.gz"
 EXTRACTED_NAME="hivempos_linux_amd64"
@@ -328,6 +329,16 @@ get_latest_version_from_page() {
 
 # ==================== init_software_version函数（优化版） ====================
 init_software_version() {
+    # 如果SET_APP_VERSION!=空字符串的话，那么就不执行下面的动态获取
+    if [[ -n "$SET_APP_VERSION" ]]; then
+        SOFTWARE_VERSION="$SET_APP_VERSION"
+        print_success "$(print_message version_success) $SOFTWARE_VERSION (使用预设版本)"
+        
+        # 设置下载URL
+        DOWNLOAD_URL="https://github.com/hivecassiny/HiveMPOS/releases/download/$SOFTWARE_VERSION/${SOFTWARE_NAME}_linux_amd64.tar.gz"
+        return 0
+    fi
+    
     # 首先尝试自动获取最新版本
     local latest_version
     latest_version=$(get_latest_version_from_page)
