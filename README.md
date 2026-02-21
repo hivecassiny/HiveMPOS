@@ -25,7 +25,7 @@
 
 <br/>
 <p align="center">
-  <img src="https://cdn.adtidy.org/public/Adguard/Common/adguard_home.gif" width="800"/>
+  <img src="https://raw.githubusercontent.com/hivecassiny/HiveMPOS/main/img/hivempos_ins.gif" width="800"/>
 </p>
 <hr/>
 
