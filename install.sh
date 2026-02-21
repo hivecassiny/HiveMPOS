@@ -9,7 +9,7 @@
 SCRIPT_VERSION="1.0.25"
 
 # 软件信息
-SET_APP_VERSION="v0.5.8"
+SET_APP_VERSION="v0.6.0"
 SOFTWARE_NAME="hivempos"
 ARCHIVE_NAME="$SOFTWARE_NAME.tar.gz"
 EXTRACTED_NAME="hivempos_linux_amd64"
